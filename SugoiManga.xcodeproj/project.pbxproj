@@ -1,0 +1,720 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFD3FB892732364700B0DD3B /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB882732364700B0DD3B /* Tests_iOS.swift */; };
+		BFD3FB8B2732364700B0DD3B /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB8A2732364700B0DD3B /* Tests_iOSLaunchTests.swift */; };
+		BFD3FB952732364700B0DD3B /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB942732364700B0DD3B /* Tests_macOS.swift */; };
+		BFD3FB972732364700B0DD3B /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB962732364700B0DD3B /* Tests_macOSLaunchTests.swift */; };
+		BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */; };
+		BFD3FB992732364700B0DD3B /* SugoiMangaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */; };
+		BFD3FB9A2732364700B0DD3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB712732364500B0DD3B /* ContentView.swift */; };
+		BFD3FB9B2732364700B0DD3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB712732364500B0DD3B /* ContentView.swift */; };
+		BFD3FB9C2732364700B0DD3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD3FB722732364700B0DD3B /* Assets.xcassets */; };
+		BFD3FB9D2732364700B0DD3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD3FB722732364700B0DD3B /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFD3FB852732364700B0DD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFD3FB6B2732364500B0DD3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFD3FB762732364700B0DD3B;
+			remoteInfo = "SugoiManga (iOS)";
+		};
+		BFD3FB912732364700B0DD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFD3FB6B2732364500B0DD3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFD3FB7C2732364700B0DD3B;
+			remoteInfo = "SugoiManga (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugoiMangaApp.swift; sourceTree = "<group>"; };
+		BFD3FB712732364500B0DD3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BFD3FB722732364700B0DD3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD3FB772732364700B0DD3B /* SugoiManga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugoiManga.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD3FB7D2732364700B0DD3B /* SugoiManga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugoiManga.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD3FB7F2732364700B0DD3B /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		BFD3FB842732364700B0DD3B /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD3FB882732364700B0DD3B /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		BFD3FB8A2732364700B0DD3B /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
+		BFD3FB902732364700B0DD3B /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD3FB942732364700B0DD3B /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		BFD3FB962732364700B0DD3B /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFD3FB742732364700B0DD3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB7A2732364700B0DD3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB812732364700B0DD3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB8D2732364700B0DD3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFD3FB6A2732364500B0DD3B = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB6F2732364500B0DD3B /* Shared */,
+				BFD3FB7E2732364700B0DD3B /* macOS */,
+				BFD3FB872732364700B0DD3B /* Tests iOS */,
+				BFD3FB932732364700B0DD3B /* Tests macOS */,
+				BFD3FB782732364700B0DD3B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFD3FB6F2732364500B0DD3B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */,
+				BFD3FB712732364500B0DD3B /* ContentView.swift */,
+				BFD3FB722732364700B0DD3B /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BFD3FB782732364700B0DD3B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB772732364700B0DD3B /* SugoiManga.app */,
+				BFD3FB7D2732364700B0DD3B /* SugoiManga.app */,
+				BFD3FB842732364700B0DD3B /* Tests iOS.xctest */,
+				BFD3FB902732364700B0DD3B /* Tests macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFD3FB7E2732364700B0DD3B /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB7F2732364700B0DD3B /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		BFD3FB872732364700B0DD3B /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB882732364700B0DD3B /* Tests_iOS.swift */,
+				BFD3FB8A2732364700B0DD3B /* Tests_iOSLaunchTests.swift */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		BFD3FB932732364700B0DD3B /* Tests macOS */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FB942732364700B0DD3B /* Tests_macOS.swift */,
+				BFD3FB962732364700B0DD3B /* Tests_macOSLaunchTests.swift */,
+			);
+			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFD3FB762732364700B0DD3B /* SugoiManga (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD3FBA02732364700B0DD3B /* Build configuration list for PBXNativeTarget "SugoiManga (iOS)" */;
+			buildPhases = (
+				BFD3FB732732364700B0DD3B /* Sources */,
+				BFD3FB742732364700B0DD3B /* Frameworks */,
+				BFD3FB752732364700B0DD3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SugoiManga (iOS)";
+			productName = "SugoiManga (iOS)";
+			productReference = BFD3FB772732364700B0DD3B /* SugoiManga.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFD3FB7C2732364700B0DD3B /* SugoiManga (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD3FBA32732364700B0DD3B /* Build configuration list for PBXNativeTarget "SugoiManga (macOS)" */;
+			buildPhases = (
+				BFD3FB792732364700B0DD3B /* Sources */,
+				BFD3FB7A2732364700B0DD3B /* Frameworks */,
+				BFD3FB7B2732364700B0DD3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SugoiManga (macOS)";
+			productName = "SugoiManga (macOS)";
+			productReference = BFD3FB7D2732364700B0DD3B /* SugoiManga.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFD3FB832732364700B0DD3B /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD3FBA62732364700B0DD3B /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				BFD3FB802732364700B0DD3B /* Sources */,
+				BFD3FB812732364700B0DD3B /* Frameworks */,
+				BFD3FB822732364700B0DD3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFD3FB862732364700B0DD3B /* PBXTargetDependency */,
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = BFD3FB842732364700B0DD3B /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		BFD3FB8F2732364700B0DD3B /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD3FBA92732364700B0DD3B /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				BFD3FB8C2732364700B0DD3B /* Sources */,
+				BFD3FB8D2732364700B0DD3B /* Frameworks */,
+				BFD3FB8E2732364700B0DD3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFD3FB922732364700B0DD3B /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = "Tests macOS";
+			productReference = BFD3FB902732364700B0DD3B /* Tests macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFD3FB6B2732364500B0DD3B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					BFD3FB762732364700B0DD3B = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					BFD3FB7C2732364700B0DD3B = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					BFD3FB832732364700B0DD3B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = BFD3FB762732364700B0DD3B;
+					};
+					BFD3FB8F2732364700B0DD3B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = BFD3FB7C2732364700B0DD3B;
+					};
+				};
+			};
+			buildConfigurationList = BFD3FB6E2732364500B0DD3B /* Build configuration list for PBXProject "SugoiManga" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFD3FB6A2732364500B0DD3B;
+			productRefGroup = BFD3FB782732364700B0DD3B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFD3FB762732364700B0DD3B /* SugoiManga (iOS) */,
+				BFD3FB7C2732364700B0DD3B /* SugoiManga (macOS) */,
+				BFD3FB832732364700B0DD3B /* Tests iOS */,
+				BFD3FB8F2732364700B0DD3B /* Tests macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFD3FB752732364700B0DD3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB9C2732364700B0DD3B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB7B2732364700B0DD3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB9D2732364700B0DD3B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB822732364700B0DD3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB8E2732364700B0DD3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFD3FB732732364700B0DD3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB9A2732364700B0DD3B /* ContentView.swift in Sources */,
+				BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB792732364700B0DD3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB9B2732364700B0DD3B /* ContentView.swift in Sources */,
+				BFD3FB992732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB802732364700B0DD3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB8B2732364700B0DD3B /* Tests_iOSLaunchTests.swift in Sources */,
+				BFD3FB892732364700B0DD3B /* Tests_iOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFD3FB8C2732364700B0DD3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD3FB972732364700B0DD3B /* Tests_macOSLaunchTests.swift in Sources */,
+				BFD3FB952732364700B0DD3B /* Tests_macOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFD3FB862732364700B0DD3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFD3FB762732364700B0DD3B /* SugoiManga (iOS) */;
+			targetProxy = BFD3FB852732364700B0DD3B /* PBXContainerItemProxy */;
+		};
+		BFD3FB922732364700B0DD3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFD3FB7C2732364700B0DD3B /* SugoiManga (macOS) */;
+			targetProxy = BFD3FB912732364700B0DD3B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BFD3FB9E2732364700B0DD3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BFD3FB9F2732364700B0DD3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BFD3FBA12732364700B0DD3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_NAME = SugoiManga;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFD3FBA22732364700B0DD3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_NAME = SugoiManga;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFD3FBA42732364700B0DD3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_NAME = SugoiManga;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BFD3FBA52732364700B0DD3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_NAME = SugoiManga;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BFD3FBA72732364700B0DD3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.vincentle.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SugoiManga (iOS)";
+			};
+			name = Debug;
+		};
+		BFD3FBA82732364700B0DD3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.vincentle.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SugoiManga (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BFD3FBAA2732364700B0DD3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.vincentle.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "SugoiManga (macOS)";
+			};
+			name = Debug;
+		};
+		BFD3FBAB2732364700B0DD3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.vincentle.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "SugoiManga (macOS)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFD3FB6E2732364500B0DD3B /* Build configuration list for PBXProject "SugoiManga" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD3FB9E2732364700B0DD3B /* Debug */,
+				BFD3FB9F2732364700B0DD3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD3FBA02732364700B0DD3B /* Build configuration list for PBXNativeTarget "SugoiManga (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD3FBA12732364700B0DD3B /* Debug */,
+				BFD3FBA22732364700B0DD3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD3FBA32732364700B0DD3B /* Build configuration list for PBXNativeTarget "SugoiManga (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD3FBA42732364700B0DD3B /* Debug */,
+				BFD3FBA52732364700B0DD3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD3FBA62732364700B0DD3B /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD3FBA72732364700B0DD3B /* Debug */,
+				BFD3FBA82732364700B0DD3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFD3FBA92732364700B0DD3B /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD3FBAA2732364700B0DD3B /* Debug */,
+				BFD3FBAB2732364700B0DD3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFD3FB6B2732364500B0DD3B /* Project object */;
+}
