@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF7BB5E22733101C000EDC56 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5E12733101C000EDC56 /* Manga.swift */; };
+		BF7BB5E427331BD5000EDC56 /* MangaDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5E327331BD5000EDC56 /* MangaDetail.swift */; };
+		BF7BB5E6273324CB000EDC56 /* NetTruyenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */; };
+		BF7BB5EC273341FD000EDC56 /* NetTruyenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */; };
+		BF7BB5EE273345F7000EDC56 /* MangaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5ED273345F7000EDC56 /* MangaService.swift */; };
 		BFD3FB892732364700B0DD3B /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB882732364700B0DD3B /* Tests_iOS.swift */; };
 		BFD3FB8B2732364700B0DD3B /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB8A2732364700B0DD3B /* Tests_iOSLaunchTests.swift */; };
 		BFD3FB952732364700B0DD3B /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB942732364700B0DD3B /* Tests_macOS.swift */; };
 		BFD3FB972732364700B0DD3B /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB962732364700B0DD3B /* Tests_macOSLaunchTests.swift */; };
 		BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */; };
 		BFD3FB992732364700B0DD3B /* SugoiMangaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */; };
-		BFD3FB9A2732364700B0DD3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB712732364500B0DD3B /* ContentView.swift */; };
-		BFD3FB9B2732364700B0DD3B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB712732364500B0DD3B /* ContentView.swift */; };
 		BFD3FB9C2732364700B0DD3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD3FB722732364700B0DD3B /* Assets.xcassets */; };
 		BFD3FB9D2732364700B0DD3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD3FB722732364700B0DD3B /* Assets.xcassets */; };
+		BFD3FBAE273236C400B0DD3B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FBAD273236C400B0DD3B /* HomeView.swift */; };
+		BFD3FBB027324EB400B0DD3B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FBAF27324EB400B0DD3B /* HomeViewModel.swift */; };
+		BFD3FBB3273254A900B0DD3B /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = BFD3FBB2273254A900B0DD3B /* Kanna */; };
+		BFF73B2D273398190076103E /* MangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF73B2C273398180076103E /* MangaView.swift */; };
+		BFF73B302733A3560076103E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BFF73B2F2733A3560076103E /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +45,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF7BB5E12733101C000EDC56 /* Manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
+		BF7BB5E327331BD5000EDC56 /* MangaDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDetail.swift; sourceTree = "<group>"; };
+		BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTruyenParser.swift; sourceTree = "<group>"; };
+		BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTruyenService.swift; sourceTree = "<group>"; };
+		BF7BB5ED273345F7000EDC56 /* MangaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaService.swift; sourceTree = "<group>"; };
 		BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugoiMangaApp.swift; sourceTree = "<group>"; };
-		BFD3FB712732364500B0DD3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFD3FB722732364700B0DD3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFD3FB772732364700B0DD3B /* SugoiManga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugoiManga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD3FB7D2732364700B0DD3B /* SugoiManga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugoiManga.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +61,9 @@
 		BFD3FB902732364700B0DD3B /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD3FB942732364700B0DD3B /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		BFD3FB962732364700B0DD3B /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		BFD3FBAD273236C400B0DD3B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BFD3FBAF27324EB400B0DD3B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		BFF73B2C273398180076103E /* MangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF73B302733A3560076103E /* Kingfisher in Frameworks */,
+				BFD3FBB3273254A900B0DD3B /* Kanna in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +100,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF7BB5E02733100B000EDC56 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BF7BB5E12733101C000EDC56 /* Manga.swift */,
+				BF7BB5E327331BD5000EDC56 /* MangaDetail.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF7BB5E927333903000EDC56 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3FBAD273236C400B0DD3B /* HomeView.swift */,
+				BFD3FBAF27324EB400B0DD3B /* HomeViewModel.swift */,
+				BFF73B2C273398180076103E /* MangaView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BF7BB5EA27334193000EDC56 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BF7BB5ED273345F7000EDC56 /* MangaService.swift */,
+				BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		BFD3FB6A2732364500B0DD3B = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +142,11 @@
 		BFD3FB6F2732364500B0DD3B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BFF73B312733AE6B0076103E /* Parsers */,
+				BF7BB5EA27334193000EDC56 /* Services */,
+				BF7BB5E02733100B000EDC56 /* Models */,
+				BFD3FBAC273236A900B0DD3B /* Views */,
 				BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */,
-				BFD3FB712732364500B0DD3B /* ContentView.swift */,
 				BFD3FB722732364700B0DD3B /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -141,6 +189,22 @@
 			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
+		BFD3FBAC273236A900B0DD3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF7BB5E927333903000EDC56 /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BFF73B312733AE6B0076103E /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +221,10 @@
 			dependencies = (
 			);
 			name = "SugoiManga (iOS)";
+			packageProductDependencies = (
+				BFD3FBB2273254A900B0DD3B /* Kanna */,
+				BFF73B2F2733A3560076103E /* Kingfisher */,
+			);
 			productName = "SugoiManga (iOS)";
 			productReference = BFD3FB772732364700B0DD3B /* SugoiManga.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +317,10 @@
 				Base,
 			);
 			mainGroup = BFD3FB6A2732364500B0DD3B;
+			packageReferences = (
+				BFD3FBB1273254A900B0DD3B /* XCRemoteSwiftPackageReference "Kanna" */,
+				BFF73B2E2733A3560076103E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = BFD3FB782732364700B0DD3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -299,8 +371,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFD3FB9A2732364700B0DD3B /* ContentView.swift in Sources */,
+				BF7BB5EC273341FD000EDC56 /* NetTruyenService.swift in Sources */,
+				BFD3FBAE273236C400B0DD3B /* HomeView.swift in Sources */,
+				BF7BB5E6273324CB000EDC56 /* NetTruyenParser.swift in Sources */,
+				BF7BB5EE273345F7000EDC56 /* MangaService.swift in Sources */,
+				BF7BB5E22733101C000EDC56 /* Manga.swift in Sources */,
+				BF7BB5E427331BD5000EDC56 /* MangaDetail.swift in Sources */,
 				BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
+				BFF73B2D273398190076103E /* MangaView.swift in Sources */,
+				BFD3FBB027324EB400B0DD3B /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +387,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFD3FB9B2732364700B0DD3B /* ContentView.swift in Sources */,
 				BFD3FB992732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,6 +793,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFD3FBB1273254A900B0DD3B /* XCRemoteSwiftPackageReference "Kanna" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tid-kijyun/Kanna";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		BFF73B2E2733A3560076103E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFD3FBB2273254A900B0DD3B /* Kanna */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFD3FBB1273254A900B0DD3B /* XCRemoteSwiftPackageReference "Kanna" */;
+			productName = Kanna;
+		};
+		BFF73B2F2733A3560076103E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFF73B2E2733A3560076103E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFD3FB6B2732364500B0DD3B /* Project object */;
 }
