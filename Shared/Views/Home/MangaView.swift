@@ -12,22 +12,26 @@ struct MangaView: View {
     let manga: Manga
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            KFImage(manga.coverImageURL)
-                .cancelOnDisappear(true)
-                .resizable()
-                .aspectRatio(2.5/3, contentMode: .fit)
+        ZStack {
+            Rectangle()
+                .foregroundColor(.white)
 
-            Text(manga.title)
-                .font(.caption)
-                .fontWeight(.medium)
-                .padding(8)
-                .frame(height: 50)
+            VStack(spacing: 0) {
+                KFImage(manga.coverImageURL)
+                    .cancelOnDisappear(true)
+                    .resizable()
+                    .aspectRatio(2.5/3, contentMode: .fit)
+
+                Text(manga.title)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                    .padding(8)
+                    .frame(height: 65)
+                    .frame(maxWidth: .infinity)
+            }
         }
-        .cornerRadius(5)
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.gray, lineWidth: 1)
-        )
+        .cornerRadius(8)
+        .shadow(radius: 8)
     }
 }
