@@ -16,22 +16,29 @@ struct HomeView: View {
                 if viewModel.fetching {
                     ProgressView()
                 } else {
-                    ScrollView {
-                        let columns = [GridItem(.adaptive(minimum: 100), spacing: 12)]
-                        LazyVGrid(columns: columns, spacing: 12) {
-                            ForEach(viewModel.mangas) { manga in
-                                MangaView(manga: manga)
-                            }
-                        }
-                        .padding()
-                    }
+                    mangaList
                 }
             }
             .navigationTitle("Latest Updates")
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(.stack)
         .onAppear {
             viewModel.fetchMangas()
+        }
+    }
+
+    var mangaList: some View {
+        ScrollView {
+            let columns = [GridItem(.adaptive(minimum: 100), spacing: 12)]
+            LazyVGrid(columns: columns, spacing: 12) {
+                ForEach(viewModel.mangas) { manga in
+                    NavigationLink(destination: MangaDetailView(manga: manga)) {
+                        MangaView(manga: manga)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding()
         }
     }
 }

@@ -12,6 +12,8 @@
 		BF7BB5E6273324CB000EDC56 /* NetTruyenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */; };
 		BF7BB5EC273341FD000EDC56 /* NetTruyenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */; };
 		BF7BB5EE273345F7000EDC56 /* MangaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BB5ED273345F7000EDC56 /* MangaService.swift */; };
+		BF85B4B62734DCF50049CC7C /* MangaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85B4B52734DCF50049CC7C /* MangaDetailView.swift */; };
+		BF85B4B82734F2FE0049CC7C /* MangaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF85B4B72734F2FE0049CC7C /* MangaDetailViewModel.swift */; };
 		BFD3FB892732364700B0DD3B /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB882732364700B0DD3B /* Tests_iOS.swift */; };
 		BFD3FB8B2732364700B0DD3B /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB8A2732364700B0DD3B /* Tests_iOSLaunchTests.swift */; };
 		BFD3FB952732364700B0DD3B /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FB942732364700B0DD3B /* Tests_macOS.swift */; };
@@ -50,6 +52,8 @@
 		BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTruyenParser.swift; sourceTree = "<group>"; };
 		BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTruyenService.swift; sourceTree = "<group>"; };
 		BF7BB5ED273345F7000EDC56 /* MangaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaService.swift; sourceTree = "<group>"; };
+		BF85B4B52734DCF50049CC7C /* MangaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDetailView.swift; sourceTree = "<group>"; };
+		BF85B4B72734F2FE0049CC7C /* MangaDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDetailViewModel.swift; sourceTree = "<group>"; };
 		BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugoiMangaApp.swift; sourceTree = "<group>"; };
 		BFD3FB722732364700B0DD3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFD3FB772732364700B0DD3B /* SugoiManga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugoiManga.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +132,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		BF85B4B42734DCD40049CC7C /* MangaDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BF85B4B52734DCF50049CC7C /* MangaDetailView.swift */,
+				BF85B4B72734F2FE0049CC7C /* MangaDetailViewModel.swift */,
+			);
+			path = MangaDetail;
+			sourceTree = "<group>";
+		};
 		BFD3FB6A2732364500B0DD3B = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +205,7 @@
 		BFD3FBAC273236A900B0DD3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF85B4B42734DCD40049CC7C /* MangaDetail */,
 				BF7BB5E927333903000EDC56 /* Home */,
 			);
 			path = Views;
@@ -379,6 +393,8 @@
 				BF7BB5E427331BD5000EDC56 /* MangaDetail.swift in Sources */,
 				BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
 				BFF73B2D273398190076103E /* MangaView.swift in Sources */,
+				BF85B4B82734F2FE0049CC7C /* MangaDetailViewModel.swift in Sources */,
+				BF85B4B62734DCF50049CC7C /* MangaDetailView.swift in Sources */,
 				BFD3FBB027324EB400B0DD3B /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
