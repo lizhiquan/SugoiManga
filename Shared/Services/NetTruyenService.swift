@@ -9,9 +9,17 @@ import Combine
 import Foundation
 
 struct NetTruyenService: MangaService {
+    private let parser = NetTruyenParser()
+
     func latestUpdateMangasPublisher() -> AnyPublisher<[Manga], Error> {
         URLSession.shared.dataTaskPublisher(for: URL(string: "https://www.nettruyenpro.com")!)
-            .tryMap { try NetTruyenParser().parseMangas(from: $0.data) }
+            .tryMap { try parser.parseMangas(from: $0.data) }
+            .eraseToAnyPublisher()
+    }
+
+    func mangaDetailPublisher(url: URL) -> AnyPublisher<MangaDetail, Error> {
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { try parser.parseMangaDetail(from: $0.data) }
             .eraseToAnyPublisher()
     }
 }

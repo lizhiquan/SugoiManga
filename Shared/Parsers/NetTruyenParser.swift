@@ -25,7 +25,9 @@ struct NetTruyenParser {
                 let coverPath = item.at_xpath("//div[@class='image']//img")?["data-original"] ?? ""
                 let coverURL = URL(string: "https:\(coverPath)")
                 let description = item.at_xpath("//div[@class='box_text']")?.text
-                let detailURL = item.at_xpath("//figcaption//a")?["href"] .flatMap(URL.init)
+                let detailURL = (item.at_xpath("//figcaption//a")?["href"]?
+                    .replacingOccurrences(of: "http:", with: "https:") as String?)
+                    .flatMap(URL.init)
                 let author = item.at_xpath("//p[label='Tác giả:']")?.text?
                     .replacingOccurrences(of: "\nTác giả:", with: "") ?? ""
                 let categories = item.at_xpath("//p[label='Thể loại:']")?.text?
@@ -57,5 +59,58 @@ struct NetTruyenParser {
                     views: views
                 )
             }
+    }
+
+    func parseMangaDetail(from data: Data) throws -> MangaDetail {
+        let html = try HTML(html: data, encoding: .utf8)
+        let regex = try NSRegularExpression(pattern: #"\[Cập nhật lúc: (.+)\]"#, options: [])
+        let updatedAt = html.at_xpath("//time")?.text
+            .flatMap { content -> String? in
+                guard let match = regex.firstMatch(
+                    in: content,
+                    options: [],
+                    range: NSRange(content.startIndex..<content.endIndex, in: content)
+                ), let range = Range(match.range(at: 1), in: content) else {
+                    return nil
+                }
+
+                return String(content[range])
+            }
+            .flatMap { dateStr -> Date? in
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm dd/MM/yyyy"
+                formatter.locale = Locale(identifier: "vi_VN")
+                return formatter.date(from: dateStr)
+            }
+
+        guard let chaptersNode = html.at_css("#nt_listchapter") else {
+            throw ParseError.parseFailed
+        }
+
+        let chapters = try chaptersNode.xpath("//li[@class='row' or @class='row less']")
+            .map { item -> Chapter in
+                let title = item.at_xpath("//a")?.text
+                let updatedAt = item.xpath("//div")[1].text
+                let rawViews = item.xpath("//div")[2].text
+                let views = (rawViews?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
+                let detailURL = (item.at_xpath("//a")?["href"]?
+                    .replacingOccurrences(of: "http:", with: "https:") as String?)
+                    .flatMap(URL.init)
+
+                guard let title = title,
+                      let updatedAt = updatedAt,
+                      let detailURL = detailURL else {
+                          throw ParseError.parseFailed
+                      }
+
+                return Chapter(
+                    title: title,
+                    updatedAt: updatedAt,
+                    views: views,
+                    detailURL: detailURL
+                )
+            }
+
+        return MangaDetail(updatedAt: updatedAt, chapters: chapters)
     }
 }

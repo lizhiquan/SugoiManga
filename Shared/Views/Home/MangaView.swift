@@ -23,12 +23,13 @@ struct MangaView: View {
                     .aspectRatio(2.5/3, contentMode: .fit)
 
                 Text(manga.title)
-                    .font(.caption)
+                    .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
                     .padding(8)
-                    .frame(height: 65)
+                    .frame(height: 60)
                     .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
             }
         }
         .cornerRadius(8)
