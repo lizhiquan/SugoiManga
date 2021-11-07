@@ -10,16 +10,16 @@ import Foundation
 struct Manga: Identifiable {
     let title: String
     let description: String
-    let author: String
+    let author: String?
     let coverImageURL: URL?
     let detailURL: URL
-    let categories: [String]
+    let genres: [String]
     let status: Status
-    let views: Int
+    let view: Int
 
     enum Status {
         case ongoing
-        case finished
+        case completed
     }
 
     var id: String { title }

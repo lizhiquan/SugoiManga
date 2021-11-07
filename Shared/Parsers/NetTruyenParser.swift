@@ -19,8 +19,8 @@ struct NetTruyenParser {
             throw ParseError.parseFailed
         }
 
-        return try contentNode.xpath("//div[@class='item']")
-            .map { item in
+        let mangas = try contentNode.xpath("//div[@class='item']")
+            .map { item -> Manga in
                 let title = item.at_xpath("//div[@class='title']")?.text
                 let coverPath = item.at_xpath("//div[@class='image']//img")?["data-original"] ?? ""
                 let coverURL = URL(string: "https:\(coverPath)")
@@ -29,22 +29,22 @@ struct NetTruyenParser {
                     .replacingOccurrences(of: "http:", with: "https:") as String?)
                     .flatMap(URL.init)
                 let author = item.at_xpath("//p[label='Tác giả:']")?.text?
-                    .replacingOccurrences(of: "\nTác giả:", with: "") ?? ""
-                let categories = item.at_xpath("//p[label='Thể loại:']")?.text?
+                    .replacingOccurrences(of: "\nTác giả:", with: "")
+                let genres = item.at_xpath("//p[label='Thể loại:']")?.text?
                     .replacingOccurrences(of: "\nThể loại:", with: "")
                     .components(separatedBy: ", ")
                 let rawStatus = item.at_xpath("//p[label='Tình trạng:']")?.text?
                     .replacingOccurrences(of: "\nTình trạng:", with: "")
-                let status: Manga.Status = rawStatus == "Đang tiến hành" ? .ongoing : .finished
-                let rawViews = item.at_xpath("//p[label='Lượt xem:']")?.text?
+                let status: Manga.Status = rawStatus == "Đang tiến hành" ? .ongoing : .completed
+                let rawView = item.at_xpath("//p[label='Lượt xem:']")?.text?
                     .replacingOccurrences(of: "\nLượt xem:", with: "")
-                let views = (rawViews?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
+                let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
 
                 guard let title = title,
                       let description = description,
                       let detailURL = detailURL,
-                      let categories = categories,
-                      let views = views else {
+                      let genres = genres,
+                      let view = view else {
                           throw ParseError.parseFailed
                       }
 
@@ -54,18 +54,21 @@ struct NetTruyenParser {
                     author: author,
                     coverImageURL: coverURL,
                     detailURL: detailURL,
-                    categories: categories,
+                    genres: genres,
                     status: status,
-                    views: views
+                    view: view
                 )
             }
+        print(mangas)
+
+        return mangas
     }
 
     func parseMangaDetail(from data: Data) throws -> MangaDetail {
         let html = try HTML(html: data, encoding: .utf8)
-        let regex = try NSRegularExpression(pattern: #"\[Cập nhật lúc: (.+)\]"#, options: [])
-        let updatedAt = html.at_xpath("//time")?.text
+        let updatedAt = try html.at_xpath("//time")?.text
             .flatMap { content -> String? in
+                let regex = try NSRegularExpression(pattern: #"\[Cập nhật lúc: (.+)\]"#, options: [])
                 guard let match = regex.firstMatch(
                     in: content,
                     options: [],
@@ -91,8 +94,8 @@ struct NetTruyenParser {
             .map { item -> Chapter in
                 let title = item.at_xpath("//a")?.text
                 let updatedAt = item.xpath("//div")[1].text
-                let rawViews = item.xpath("//div")[2].text
-                let views = (rawViews?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
+                let rawView = item.xpath("//div")[2].text
+                let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
                 let detailURL = (item.at_xpath("//a")?["href"]?
                     .replacingOccurrences(of: "http:", with: "https:") as String?)
                     .flatMap(URL.init)
@@ -106,11 +109,37 @@ struct NetTruyenParser {
                 return Chapter(
                     title: title,
                     updatedAt: updatedAt,
-                    views: views,
+                    view: view,
                     detailURL: detailURL
                 )
             }
 
-        return MangaDetail(updatedAt: updatedAt, chapters: chapters)
+        let mangaDetail = MangaDetail(updatedAt: updatedAt, chapters: chapters)
+        print(mangaDetail)
+
+        return mangaDetail
+    }
+
+    func parseChapterDetail(from data: Data, baseURL: URL) throws -> ChapterDetail {
+        let html = try HTML(html: data, encoding: .utf8)
+        let imageURLs = try html.xpath("//div[@class='page-chapter']/img")
+            .map { item -> URL in
+                guard let path = item["data-original"],
+                      let url = URL(
+                        string: path.hasPrefix("http") ? path : "https:\(path)"
+                      ) else {
+                          throw ParseError.parseFailed
+                      }
+                return url
+            }
+        let imageRequestHeaders = ["Referer": baseURL.absoluteString]
+
+        let chapterDetail = ChapterDetail(
+            imageURLs: imageURLs,
+            imageRequestHeaders: imageRequestHeaders
+        )
+        print(chapterDetail)
+
+        return chapterDetail
     }
 }

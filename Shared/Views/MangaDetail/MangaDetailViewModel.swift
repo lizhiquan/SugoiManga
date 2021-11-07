@@ -8,11 +8,17 @@
 import Foundation
 
 final class MangaDetailViewModel: ObservableObject {
-    let manga: Manga
+    private let manga: Manga
     private let mangaService: MangaService
 
-    @Published private(set) var mangaDetail: MangaDetail?
+    @Published private var mangaDetail: MangaDetail?
     @Published private(set) var fetching = false
+
+    var title: String { manga.title }
+    var coverImageURL: URL? { manga.coverImageURL }
+    var author: String? { manga.author }
+    var description: String { manga.description }
+    var chapters: [Chapter] { mangaDetail?.chapters ?? [] }
 
     init(manga: Manga, mangaService: MangaService = NetTruyenService()) {
         self.manga = manga
