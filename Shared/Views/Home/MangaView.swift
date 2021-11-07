@@ -14,7 +14,7 @@ struct MangaView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.tertiarySystemBackground))
 
             VStack(spacing: 0) {
                 KFImage(manga.coverImageURL)
