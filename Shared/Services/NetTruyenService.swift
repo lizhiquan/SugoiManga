@@ -30,4 +30,14 @@ struct NetTruyenService: MangaService {
             .tryMap { try parser.parseChapterDetail(from: $0.data, baseURL: baseURL) }
             .eraseToAnyPublisher()
     }
+
+    func searchMangasPublisher(keyword: String) -> AnyPublisher<[Manga], Error> {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        urlComponents.path = "/tim-truyen"
+        urlComponents.queryItems = [URLQueryItem(name: "keyword", value: keyword)]
+        
+        return URLSession.shared.dataTaskPublisher(for: urlComponents.url!)
+            .tryMap { try parser.parseMangas(from: $0.data) }
+            .eraseToAnyPublisher()
+    }
 }

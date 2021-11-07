@@ -12,4 +12,5 @@ protocol MangaService {
     func latestUpdateMangasPublisher() -> AnyPublisher<[Manga], Error>
     func mangaDetailPublisher(url: URL) -> AnyPublisher<MangaDetail, Error>
     func chapterDetailPublisher(url: URL) -> AnyPublisher<ChapterDetail, Error>
+    func searchMangasPublisher(keyword: String) -> AnyPublisher<[Manga], Error>
 }

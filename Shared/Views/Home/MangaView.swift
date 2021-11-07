@@ -18,6 +18,9 @@ struct MangaView: View {
 
             VStack(spacing: 0) {
                 KFImage(manga.coverImageURL)
+                    .placeholder {
+                        ProgressView()
+                    }
                     .cancelOnDisappear(true)
                     .resizable()
                     .aspectRatio(2.5/3, contentMode: .fit)

@@ -20,10 +20,17 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("Latest Updates")
+            .searchable(
+                text: $viewModel.searchText,
+                placement: .navigationBarDrawer(displayMode: .always)
+            )
+            .onSubmit(of: .search) {
+                viewModel.performSearch()
+            }
         }
         .navigationViewStyle(.stack)
         .onAppear {
-            viewModel.fetchMangas()
+            viewModel.fetchLatestMangas()
         }
     }
 
