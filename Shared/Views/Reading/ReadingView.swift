@@ -18,19 +18,21 @@ struct ReadingView: View {
     var body: some View {
         ZoomableScrollView {
             ScrollView {
-                if viewModel.fetching {
-                    ProgressView()
-                }
-                ForEach(viewModel.imageURLs, id: \.self) { url in
-                    KFImage(url)
-                        .placeholder { progress in
-                            ProgressView(progress)
-                                .progressViewStyle(.circular)
-                                .padding()
-                        }
-                        .requestModifier(imageRequestModifier)
-                        .resizable()
-                        .scaledToFill()
+                VStack(spacing: 0) {
+                    if viewModel.fetching {
+                        ProgressView()
+                    }
+                    ForEach(viewModel.imageURLs, id: \.self) { url in
+                        KFImage(url)
+                            .placeholder { progress in
+                                ProgressView(progress)
+                                    .progressViewStyle(.circular)
+                                    .padding()
+                            }
+                            .requestModifier(imageRequestModifier)
+                            .resizable()
+                            .scaledToFill()
+                    }
                 }
             }
         }
