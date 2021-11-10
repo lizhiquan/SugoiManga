@@ -17,13 +17,17 @@ struct MangaView: View {
                 .foregroundColor(Color(UIColor.tertiarySystemBackground))
 
             VStack(spacing: 0) {
-                KFImage(manga.coverImageURL)
-                    .placeholder {
-                        ProgressView()
-                    }
-                    .cancelOnDisappear(true)
-                    .resizable()
-                    .aspectRatio(2.5/3, contentMode: .fit)
+                GeometryReader { geometry in
+                    KFImage(manga.coverImageURL)
+                        .placeholder {
+                            ProgressView()
+                        }
+                        .cancelOnDisappear(true)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                }
 
                 Text(manga.title)
                     .font(.subheadline)
@@ -37,5 +41,6 @@ struct MangaView: View {
         }
         .cornerRadius(8)
         .shadow(radius: 8)
+        .aspectRatio(3/5, contentMode: .fit)
     }
 }

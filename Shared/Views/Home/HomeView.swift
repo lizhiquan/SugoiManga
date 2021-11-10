@@ -36,7 +36,7 @@ struct HomeView: View {
 
     var mangaList: some View {
         ScrollView {
-            let columns = [GridItem(.adaptive(minimum: 100), spacing: 12)]
+            let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(viewModel.mangas) { manga in
                     NavigationLink(destination: MangaDetailView(manga: manga)) {
