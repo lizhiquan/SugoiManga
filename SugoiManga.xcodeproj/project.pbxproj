@@ -114,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF257FEE273B9E20007307F3 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				BFBA5E002736349F00EB4954 /* ZoomableScrollView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		BF7BB5E02733100B000EDC56 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +190,6 @@
 				BFD3FBAC273236A900B0DD3B /* Views */,
 				BFD3FB702732364500B0DD3B /* SugoiMangaApp.swift */,
 				BFD3FB722732364700B0DD3B /* Assets.xcassets */,
-				BFBA5E002736349F00EB4954 /* ZoomableScrollView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -227,6 +234,7 @@
 		BFD3FBAC273236A900B0DD3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF257FEE273B9E20007307F3 /* Custom */,
 				BFBA5DF7273602D300EB4954 /* Reading */,
 				BF85B4B42734DCD40049CC7C /* MangaDetail */,
 				BF7BB5E927333903000EDC56 /* Home */,

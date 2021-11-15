@@ -12,21 +12,23 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                if viewModel.fetching {
-                    ProgressView()
-                } else {
-                    mangaList
+            mangaList
+                .navigationTitle("Latest Updates")
+                .searchable(
+                    text: $viewModel.searchText,
+                    placement: .navigationBarDrawer(displayMode: .always)
+                )
+                .toolbar {
+                    if viewModel.fetching {
+                        ProgressView()
+                    } else {
+                        Button {
+                            viewModel.fetchLatestMangas()
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    }
                 }
-            }
-            .navigationTitle("Latest Updates")
-            .searchable(
-                text: $viewModel.searchText,
-                placement: .navigationBarDrawer(displayMode: .always)
-            )
-            .onSubmit(of: .search) {
-                viewModel.performSearch()
-            }
         }
         .navigationViewStyle(.stack)
         .onAppear {

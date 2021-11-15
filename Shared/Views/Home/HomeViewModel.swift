@@ -15,6 +15,7 @@ final class HomeViewModel: ObservableObject {
 
     private let mangaService: MangaService
     private var disposeBag = Set<AnyCancellable>()
+    private var latestMangas = [Manga]()
 
     init(mangaService: MangaService = NetTruyenService()) {
         self.mangaService = mangaService
@@ -24,39 +25,45 @@ final class HomeViewModel: ObservableObject {
             .assign(to: &$fetching)
 
         $searchText
-            .filter { $0.isEmpty }
-            .sink { _ in
-                self.fetchLatestMangas()
+            .filter { !$0.isEmpty }
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .handleEvents(receiveOutput: { _ in
+                self.fetching = true
+            })
+            .flatMap { searchText in
+                self.mangaService.searchMangasPublisher(keyword: searchText)
+                    .retry(1)
             }
-            .store(in: &disposeBag)
-    }
-
-    func fetchLatestMangas() {
-        fetching = true
-
-        mangaService.latestUpdateMangasPublisher()
-            .retry(1)
             .receive(on: DispatchQueue.main)
             .replaceError(with: [])
             .assign(to: &$mangas)
+
+        $searchText
+            .filter(\.isEmpty)
+            .dropFirst()
+            .sink(receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                if self.latestMangas.isEmpty {
+                    self.fetchLatestMangas()
+                } else {
+                    self.mangas = self.latestMangas
+                }
+            })
+            .store(in: &disposeBag)
     }
 
-    func performSearch() {
-        guard !searchText.isEmpty else {
-            fetchLatestMangas()
-            return
-        }
-
-        searchMangas()
-    }
-
-    private func searchMangas() {
+    func fetchLatestMangas(completion: (() -> Void)? = nil) {
         fetching = true
 
-        mangaService.searchMangasPublisher(keyword: searchText)
+        mangaService.latestUpdateMangasPublisher()
+            .delay(for: .seconds(0.5), scheduler: RunLoop.main)
             .retry(1)
             .receive(on: DispatchQueue.main)
             .replaceError(with: [])
+            .handleEvents(receiveOutput: { mangas in
+                self.latestMangas = mangas
+                completion?()
+            })
             .assign(to: &$mangas)
     }
 }
