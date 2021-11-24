@@ -13,8 +13,12 @@ struct NetTruyenService: MangaService {
 
     private let baseURL = URL(string: "https://www.nettruyenpro.com")!
 
-    func latestUpdateMangasPublisher() -> AnyPublisher<[Manga], Error> {
-        URLSession.shared.dataTaskPublisher(for: baseURL)
+    func latestUpdateMangasPublisher(page: Int) -> AnyPublisher<[Manga], Error> {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        urlComponents.queryItems = [URLQueryItem(name: "page", value: String(page))]
+        let url = urlComponents.url!
+
+        return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { try parser.parseMangas(from: $0.data) }
             .eraseToAnyPublisher()
     }
@@ -31,12 +35,16 @@ struct NetTruyenService: MangaService {
             .eraseToAnyPublisher()
     }
 
-    func searchMangasPublisher(keyword: String) -> AnyPublisher<[Manga], Error> {
+    func searchMangasPublisher(keyword: String, page: Int) -> AnyPublisher<[Manga], Error> {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
         urlComponents.path = "/tim-truyen"
-        urlComponents.queryItems = [URLQueryItem(name: "keyword", value: keyword)]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "keyword", value: keyword),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+        let url = urlComponents.url!
         
-        return URLSession.shared.dataTaskPublisher(for: urlComponents.url!)
+        return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { try parser.parseMangas(from: $0.data) }
             .eraseToAnyPublisher()
     }

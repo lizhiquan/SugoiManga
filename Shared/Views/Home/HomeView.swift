@@ -19,11 +19,11 @@ struct HomeView: View {
                     placement: .navigationBarDrawer(displayMode: .always)
                 )
                 .toolbar {
-                    if viewModel.fetching {
+                    if viewModel.isFetchingFromBeginning {
                         ProgressView()
                     } else {
                         Button {
-                            viewModel.fetchLatestMangas()
+                            viewModel.fetchFromBeginning()
                         } label: {
                             Image(systemName: "arrow.clockwise")
                         }
@@ -32,22 +32,37 @@ struct HomeView: View {
         }
         .navigationViewStyle(.stack)
         .onAppear {
-            viewModel.fetchLatestMangas()
+            viewModel.fetchFromBeginning()
         }
     }
 
     var mangaList: some View {
-        ScrollView {
-            let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]
-            LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(viewModel.mangas) { manga in
-                    NavigationLink(destination: MangaDetailView(manga: manga)) {
-                        MangaView(manga: manga)
+        ScrollViewReader { proxy in
+            ScrollView {
+                let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(0..<viewModel.mangas.count, id: \.self) { i in
+                        let manga = viewModel.mangas[i]
+                        NavigationLink(destination: MangaDetailView(manga: manga)) {
+                            MangaView(manga: manga)
+                        }
+                        .buttonStyle(.plain)
+                        .id(i)
+                        .onAppear {
+                            viewModel.loadMoreIfNeeded(currentItem: manga)
+                        }
                     }
-                    .buttonStyle(.plain)
+
+                    if viewModel.isFetchingNextPage {
+                        ProgressView()
+                            .padding()
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .onReceive(viewModel.scrollToTopPublisher) {
+                proxy.scrollTo(0)
+            }
         }
     }
 }

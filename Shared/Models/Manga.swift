@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Manga: Identifiable {
+struct Manga: Identifiable, Equatable {
     let title: String
     let description: String
     let author: String?

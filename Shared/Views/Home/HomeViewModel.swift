@@ -10,60 +10,78 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
     @Published private(set) var mangas: [Manga] = []
-    @Published private(set) var fetching = false
+    @Published private(set) var isFetchingFromBeginning = false
+    @Published private(set) var isFetchingNextPage = false
     @Published var searchText = ""
+    var scrollToTopPublisher: AnyPublisher<Void, Never> {
+        scrollToTopSubject.eraseToAnyPublisher()
+    }
 
     private let mangaService: MangaService
-    private var disposeBag = Set<AnyCancellable>()
-    private var latestMangas = [Manga]()
+    private var subscriptions = [AnyCancellable]()
+    private var mangaDataSource: MangaDataSource
+    private let scrollToTopSubject = PassthroughSubject<Void, Never>()
 
     init(mangaService: MangaService = NetTruyenService()) {
         self.mangaService = mangaService
+        mangaDataSource = LatestUpdateMangaDataSource(mangaService: mangaService)
+        bindDataSource()
 
-        $mangas
-            .map { _ in false }
-            .assign(to: &$fetching)
+        $searchText
+            .dropFirst()
+            .map { !$0.isEmpty }
+            .removeDuplicates()
+            .sink { [weak self] isSearching in
+                self?.updateDataSource(isSearching: isSearching)
+            }
+            .store(in: &subscriptions)
 
         $searchText
             .filter { !$0.isEmpty }
             .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-            .handleEvents(receiveOutput: { _ in
-                self.fetching = true
-            })
-            .flatMap { searchText in
-                self.mangaService.searchMangasPublisher(keyword: searchText)
-                    .retry(1)
+            .sink { [weak self] _ in
+                self?.mangaDataSource.fetchFromBeginning()
             }
-            .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
-            .assign(to: &$mangas)
-
-        $searchText
-            .filter(\.isEmpty)
-            .dropFirst()
-            .sink(receiveValue: { [weak self] _ in
-                guard let self = self else { return }
-                if self.latestMangas.isEmpty {
-                    self.fetchLatestMangas()
-                } else {
-                    self.mangas = self.latestMangas
-                }
-            })
-            .store(in: &disposeBag)
+            .store(in: &subscriptions)
     }
 
-    func fetchLatestMangas(completion: (() -> Void)? = nil) {
-        fetching = true
+    private func updateDataSource(isSearching: Bool) {
+        if isSearching {
+            mangaDataSource = SearchMangaDataSource(
+                mangaService: mangaService,
+                getKeyword: { [unowned self] in self.searchText }
+            )
+        } else {
+            mangaDataSource = LatestUpdateMangaDataSource(mangaService: mangaService)
+            mangaDataSource.fetchFromBeginning()
+            // TODO: scroll to top
+            scrollToTopSubject.send()
+        }
 
-        mangaService.latestUpdateMangasPublisher()
-            .delay(for: .seconds(0.5), scheduler: RunLoop.main)
-            .retry(1)
-            .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
-            .handleEvents(receiveOutput: { mangas in
-                self.latestMangas = mangas
-                completion?()
-            })
+        bindDataSource()
+    }
+
+    private func bindDataSource() {
+        mangaDataSource.mangasPublisher
+            .receive(on: RunLoop.main)
             .assign(to: &$mangas)
+
+        mangaDataSource.isFetchingFromBeginningPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: &$isFetchingFromBeginning)
+
+        mangaDataSource.isFetchingNextPagePublisher
+            .receive(on: RunLoop.main)
+            .assign(to: &$isFetchingNextPage)
+    }
+
+    func fetchFromBeginning() {
+        mangaDataSource.fetchFromBeginning()
+    }
+
+    func loadMoreIfNeeded(currentItem: Manga) {
+        if currentItem == mangas.last {
+            mangaDataSource.fetchNextPage()
+        }
     }
 }
