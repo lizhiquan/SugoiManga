@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 final class MangaDetailViewModel: ObservableObject {
     private let manga: Manga
@@ -23,20 +24,48 @@ final class MangaDetailViewModel: ObservableObject {
     init(manga: Manga, mangaService: MangaService = NetTruyenService()) {
         self.manga = manga
         self.mangaService = mangaService
-
-        $mangaDetail
-            .map { _ in false }
-            .assign(to: &$fetching)
     }
 
     func fetchDetail() {
-        fetching = true
+        Task {
+            await fetchDetailAsync()
+        }
+    }
 
-        mangaService.mangaDetailPublisher(url: manga.detailURL)
-            .retry(1)
-            .receive(on: DispatchQueue.main)
-            .map { d -> MangaDetail? in d }
-            .replaceError(with: nil)
-            .assign(to: &$mangaDetail)
+    func fetchDetailAsync() async {
+        DispatchQueue.main.async {
+            self.fetching = true
+        }
+
+        defer {
+            DispatchQueue.main.async {
+                self.fetching = false
+            }
+        }
+
+        do {
+            let mangaDetail = try await fetchMangaDetailAsync()
+            DispatchQueue.main.async {
+                self.mangaDetail = mangaDetail
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func fetchMangaDetailAsync() async throws -> MangaDetail {
+        try await withCheckedThrowingContinuation { c in
+            var cancellable: AnyCancellable?
+            cancellable = self.mangaService.mangaDetailPublisher(url: manga.detailURL)
+                .first()
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        c.resume(throwing: error)
+                    }
+                    cancellable?.cancel()
+                }, receiveValue: { value in
+                    c.resume(returning: value)
+                })
+        }
     }
 }

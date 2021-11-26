@@ -24,6 +24,9 @@ struct MangaDetailView: View {
                     .listRowBackground(Color.clear)
                 chapters
             }
+            .refreshable {
+                await viewModel.fetchDetailAsync()
+            }
         }
         .navigationTitle(viewModel.title)
         .onAppear {
