@@ -22,6 +22,7 @@ final class ReadingViewModel: ObservableObject {
     var hasPrevChapter: Bool { currentChapterIndex < chapters.count - 1 }
     var hasNextChapter: Bool { currentChapterIndex > 0 }
     var imageRequestHeaders: [String: String]? { chapterDetail?.imageRequestHeaders }
+    var fetchDetailCancellable: AnyCancellable?
 
     init(chapters: [Chapter],
          chapterIndex: Int,
@@ -29,33 +30,40 @@ final class ReadingViewModel: ObservableObject {
         self.chapters = chapters
         self.currentChapterIndex = chapterIndex
         self.mangaService = mangaService
-
-        $chapterDetail
-            .map { _ in false }
-            .assign(to: &$fetching)
     }
 
     private func fetchDetail(at url: URL) {
+        fetchDetailCancellable?.cancel()
         fetching = true
 
-        mangaService.chapterDetailPublisher(url: url)
-            .retry(1)
+        fetchDetailCancellable = mangaService.chapterDetailPublisher(url: url)
             .receive(on: DispatchQueue.main)
-            .map { d -> ChapterDetail? in d }
-            .replaceError(with: nil)
-            .assign(to: &$chapterDetail)
+            .sink(receiveCompletion: { completion in
+                self.fetching = false
+                if case .failure(let error) = completion {
+                    print(error)
+                }
+            }, receiveValue: { detail in
+                self.fetching = false
+                self.chapterDetail = detail
+            })
     }
 
     func fetchCurrentChapter() {
+        chapterDetail = nil
         fetchDetail(at: currentChapter.detailURL)
     }
 
     func fetchPrevChapter() {
+        guard hasPrevChapter else { return }
+
         currentChapterIndex += 1
         fetchCurrentChapter()
     }
 
     func fetchNextChapter() {
+        guard hasNextChapter else { return }
+
         currentChapterIndex -= 1
         fetchCurrentChapter()
     }

@@ -16,12 +16,14 @@ struct ReadingView: View {
     }
 
     var body: some View {
-        ZoomableScrollView {
-            ScrollView {
-                VStack(spacing: 0) {
-                    if viewModel.fetching {
-                        ProgressView()
-                    }
+        VStack {
+            if viewModel.fetching {
+                ProgressView()
+                    .padding()
+            }
+
+            ZoomableScrollView {
+                List {
                     ForEach(viewModel.imageURLs, id: \.self) { url in
                         KFImage(url)
                             .placeholder { progress in
@@ -32,8 +34,11 @@ struct ReadingView: View {
                             .requestModifier(imageRequestModifier)
                             .resizable()
                             .scaledToFill()
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets())
                     }
                 }
+                .listStyle(.plain)
             }
         }
         .navigationTitle(viewModel.title)
@@ -54,12 +59,6 @@ struct ReadingView: View {
 
     private var toolbar: some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-            Button {
-                viewModel.fetchCurrentChapter()
-            } label: {
-                Image(systemName: "arrow.clockwise")
-            }
-
             Button {
                 viewModel.fetchPrevChapter()
             } label: {
