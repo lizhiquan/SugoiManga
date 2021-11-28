@@ -31,6 +31,9 @@
 		BFD3FBB027324EB400B0DD3B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3FBAF27324EB400B0DD3B /* HomeViewModel.swift */; };
 		BFD3FBB3273254A900B0DD3B /* Kanna in Frameworks */ = {isa = PBXBuildFile; productRef = BFD3FBB2273254A900B0DD3B /* Kanna */; };
 		BFD73B56274DF353004E5003 /* MangaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B55274DF352004E5003 /* MangaDataSource.swift */; };
+		BFD73B582752FBE5004E5003 /* MangaKakalotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B572752FBE5004E5003 /* MangaKakalotService.swift */; };
+		BFD73B5A2752FBF4004E5003 /* MangaKakalotParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */; };
+		BFD73B5C27530D8A004E5003 /* MangaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B5B27530D8A004E5003 /* MangaSource.swift */; };
 		BFF73B2D273398190076103E /* MangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF73B2C273398180076103E /* MangaView.swift */; };
 		BFF73B302733A3560076103E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BFF73B2F2733A3560076103E /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -79,6 +82,9 @@
 		BFD3FBAD273236C400B0DD3B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BFD3FBAF27324EB400B0DD3B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		BFD73B55274DF352004E5003 /* MangaDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDataSource.swift; sourceTree = "<group>"; };
+		BFD73B572752FBE5004E5003 /* MangaKakalotService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaKakalotService.swift; sourceTree = "<group>"; };
+		BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaKakalotParser.swift; sourceTree = "<group>"; };
+		BFD73B5B27530D8A004E5003 /* MangaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaSource.swift; sourceTree = "<group>"; };
 		BFF73B2C273398180076103E /* MangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +137,7 @@
 				BF7BB5E327331BD5000EDC56 /* MangaDetail.swift */,
 				BFBA5DFE273604DE00EB4954 /* Chapter.swift */,
 				BFBA5DFC273604C500EB4954 /* ChapterDetail.swift */,
+				BFD73B5B27530D8A004E5003 /* MangaSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +158,7 @@
 			children = (
 				BF7BB5ED273345F7000EDC56 /* MangaService.swift */,
 				BF7BB5EB273341FD000EDC56 /* NetTruyenService.swift */,
+				BFD73B572752FBE5004E5003 /* MangaKakalotService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */,
+				BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -421,6 +430,8 @@
 			files = (
 				BF7BB5EC273341FD000EDC56 /* NetTruyenService.swift in Sources */,
 				BFD3FBAE273236C400B0DD3B /* HomeView.swift in Sources */,
+				BFD73B582752FBE5004E5003 /* MangaKakalotService.swift in Sources */,
+				BFD73B5C27530D8A004E5003 /* MangaSource.swift in Sources */,
 				BFD73B56274DF353004E5003 /* MangaDataSource.swift in Sources */,
 				BF7BB5E6273324CB000EDC56 /* NetTruyenParser.swift in Sources */,
 				BF7BB5EE273345F7000EDC56 /* MangaService.swift in Sources */,
@@ -432,6 +443,7 @@
 				BFBA5DFB273602FA00EB4954 /* ReadingViewModel.swift in Sources */,
 				BFF73B2D273398190076103E /* MangaView.swift in Sources */,
 				BF85B4B82734F2FE0049CC7C /* MangaDetailViewModel.swift in Sources */,
+				BFD73B5A2752FBF4004E5003 /* MangaKakalotParser.swift in Sources */,
 				BFBA5DF9273602E700EB4954 /* ReadingView.swift in Sources */,
 				BF85B4B62734DCF50049CC7C /* MangaDetailView.swift in Sources */,
 				BFBA5DFD273604C500EB4954 /* ChapterDetail.swift in Sources */,

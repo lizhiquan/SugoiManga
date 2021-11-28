@@ -28,8 +28,6 @@ struct NetTruyenParser {
                 let detailURL = (item.at_xpath("//figcaption//a")?["href"]?
                     .replacingOccurrences(of: "http:", with: "https:") as String?)
                     .flatMap(URL.init)
-                let author = item.at_xpath("//p[label='Tác giả:']")?.text?
-                    .replacingOccurrences(of: "\nTác giả:", with: "")
                 let genres = item.at_xpath("//p[label='Thể loại:']")?.text?
                     .replacingOccurrences(of: "\nThể loại:", with: "")
                     .components(separatedBy: ", ")
@@ -51,7 +49,6 @@ struct NetTruyenParser {
                 return Manga(
                     title: title,
                     description: description,
-                    author: author,
                     coverImageURL: coverURL,
                     detailURL: detailURL,
                     genres: genres,
@@ -59,13 +56,17 @@ struct NetTruyenParser {
                     view: view
                 )
             }
-        print(mangas)
 
         return mangas
     }
 
     func parseMangaDetail(from data: Data) throws -> MangaDetail {
         let html = try HTML(html: data, encoding: .utf8)
+        let author = html.at_css("li.author p.col-xs-8")?.text
+        let rawStatus = html.at_css("li.status p.col-xs-8")?.text
+        let status: Manga.Status = rawStatus == "Đang tiến hành" ? .ongoing : .completed
+        let genres = html.css("li.kind p.col-xs-8 a")
+            .compactMap(\.text)
         let updatedAt = try html.at_xpath("//time")?.text
             .flatMap { content -> String? in
                 let regex = try NSRegularExpression(pattern: #"\[Cập nhật lúc: (.+)\]"#, options: [])
@@ -86,7 +87,8 @@ struct NetTruyenParser {
                 return formatter.date(from: dateStr)
             }
 
-        guard let chaptersNode = html.at_css("#nt_listchapter") else {
+        guard let author = author,
+              let chaptersNode = html.at_css("#nt_listchapter") else {
             throw ParseError.parseFailed
         }
 
@@ -114,8 +116,13 @@ struct NetTruyenParser {
                 )
             }
 
-        let mangaDetail = MangaDetail(updatedAt: updatedAt, chapters: chapters)
-        print(mangaDetail)
+        let mangaDetail = MangaDetail(
+            updatedAt: updatedAt,
+            chapters: chapters,
+            author: author,
+            genres: genres,
+            status: status
+        )
 
         return mangaDetail
     }
@@ -138,7 +145,6 @@ struct NetTruyenParser {
             imageURLs: imageURLs,
             imageRequestHeaders: imageRequestHeaders
         )
-        print(chapterDetail)
 
         return chapterDetail
     }

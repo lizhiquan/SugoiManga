@@ -40,14 +40,16 @@ class LatestUpdateMangaDataSource: MangaDataSource {
             })
             .flatMap {
                 mangaService.latestUpdateMangasPublisher(page: 1)
+                    .replaceError(with: [])
             }
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.currentPage = 1
                 self?.isFetchingFromBeginningSubject.send(false)
+            }, receiveCompletion: { [weak self] _ in
+                self?.isFetchingFromBeginningSubject.send(false)
             }, receiveCancel: { [weak self] in
                 self?.isFetchingFromBeginningSubject.send(false)
             })
-            .replaceError(with: [])
             .assign(to: \.value, on: mangasSubject)
             .store(in: &subscriptions)
 
@@ -60,13 +62,15 @@ class LatestUpdateMangaDataSource: MangaDataSource {
                     .handleEvents(receiveOutput: { [weak self] _ in
                         self?.currentPage = page
                     })
+                    .replaceError(with: [])
             }
-            .handleEvents(receiveCompletion: { [weak self] _ in
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.isFetchingNextPageSubject.send(false)
+            }, receiveCompletion: { [weak self] _ in
                 self?.isFetchingNextPageSubject.send(false)
             }, receiveCancel: { [weak self] in
                 self?.isFetchingNextPageSubject.send(false)
             })
-            .replaceError(with: [])
             .map { [weak self] mangas in
                 self?.mangasSubject.value.mergeNextPageResults(mangas) ?? []
             }
@@ -107,14 +111,16 @@ class SearchMangaDataSource: MangaDataSource {
             })
             .flatMap {
                 mangaService.searchMangasPublisher(keyword: getKeyword(), page: 1)
+                    .replaceError(with: [])
             }
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.currentPage = 1
                 self?.isFetchingFromBeginningSubject.send(false)
+            }, receiveCompletion: { [weak self] _ in
+                self?.isFetchingFromBeginningSubject.send(false)
             }, receiveCancel: { [weak self] in
                 self?.isFetchingFromBeginningSubject.send(false)
             })
-            .replaceError(with: [])
             .assign(to: \.value, on: mangasSubject)
             .store(in: &subscriptions)
 
@@ -127,13 +133,15 @@ class SearchMangaDataSource: MangaDataSource {
                     .handleEvents(receiveOutput: { [weak self] _ in
                         self?.currentPage = page
                     })
+                    .replaceError(with: [])
             }
             .handleEvents(receiveOutput: { [weak self] _ in
+                self?.isFetchingNextPageSubject.send(false)
+            }, receiveCompletion: { [weak self] _ in
                 self?.isFetchingNextPageSubject.send(false)
             }, receiveCancel: { [weak self] in
                 self?.isFetchingNextPageSubject.send(false)
             })
-            .replaceError(with: [])
             .map { [weak self] mangas in
                 self?.mangasSubject.value.mergeNextPageResults(mangas) ?? []
             }

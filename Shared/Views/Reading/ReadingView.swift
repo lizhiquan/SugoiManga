@@ -11,8 +11,12 @@ import Kingfisher
 struct ReadingView: View {
     @ObservedObject private var viewModel: ReadingViewModel
 
-    init(chapters: [Chapter], chapterIndex: Int) {
-        viewModel = ReadingViewModel(chapters: chapters, chapterIndex: chapterIndex)
+    init(chapters: [Chapter], chapterIndex: Int, mangaService: MangaService) {
+        viewModel = ReadingViewModel(
+            chapters: chapters,
+            chapterIndex: chapterIndex,
+            mangaService: mangaService
+        )
     }
 
     var body: some View {

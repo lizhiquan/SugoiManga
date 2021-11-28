@@ -10,4 +10,7 @@ import Foundation
 struct MangaDetail {
     let updatedAt: Date?
     let chapters: [Chapter]
+    let author: String
+    let genres: [String]
+    let status: Manga.Status
 }

@@ -10,11 +10,10 @@ import Foundation
 struct Manga: Identifiable, Equatable {
     let title: String
     let description: String
-    let author: String?
     let coverImageURL: URL?
     let detailURL: URL
     let genres: [String]
-    let status: Status
+    let status: Status?
     let view: Int
 
     enum Status {

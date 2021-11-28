@@ -26,7 +26,7 @@ final class ReadingViewModel: ObservableObject {
 
     init(chapters: [Chapter],
          chapterIndex: Int,
-         mangaService: MangaService = NetTruyenService()) {
+         mangaService: MangaService) {
         self.chapters = chapters
         self.currentChapterIndex = chapterIndex
         self.mangaService = mangaService

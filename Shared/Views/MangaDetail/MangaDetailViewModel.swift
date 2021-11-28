@@ -10,18 +10,18 @@ import Combine
 
 final class MangaDetailViewModel: ObservableObject {
     private let manga: Manga
-    private let mangaService: MangaService
+    let mangaService: MangaService
 
     @Published private var mangaDetail: MangaDetail?
     @Published private(set) var fetching = false
 
     var title: String { manga.title }
     var coverImageURL: URL? { manga.coverImageURL }
-    var author: String? { manga.author }
+    var author: String? { mangaDetail?.author }
     var description: String { manga.description }
     var chapters: [Chapter] { mangaDetail?.chapters ?? [] }
 
-    init(manga: Manga, mangaService: MangaService = NetTruyenService()) {
+    init(manga: Manga, mangaService: MangaService) {
         self.manga = manga
         self.mangaService = mangaService
     }

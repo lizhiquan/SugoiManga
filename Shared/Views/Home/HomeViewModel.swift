@@ -13,18 +13,20 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var isFetchingFromBeginning = false
     @Published private(set) var isFetchingNextPage = false
     @Published var searchText = ""
+    @Published private(set) var mangaSource: MangaSource
+
     var scrollToTopPublisher: AnyPublisher<Void, Never> {
         scrollToTopSubject.eraseToAnyPublisher()
     }
 
-    private let mangaService: MangaService
     private var subscriptions = [AnyCancellable]()
     private var mangaDataSource: MangaDataSource
     private let scrollToTopSubject = PassthroughSubject<Void, Never>()
 
-    init(mangaService: MangaService = NetTruyenService()) {
-        self.mangaService = mangaService
-        mangaDataSource = LatestUpdateMangaDataSource(mangaService: mangaService)
+    init() {
+        let defaultSource = MangaSource.netTruyen
+        self.mangaSource = defaultSource
+        mangaDataSource = LatestUpdateMangaDataSource(mangaService: defaultSource.service)
         bindDataSource()
 
         $searchText
@@ -48,13 +50,12 @@ final class HomeViewModel: ObservableObject {
     private func updateDataSource(isSearching: Bool) {
         if isSearching {
             mangaDataSource = SearchMangaDataSource(
-                mangaService: mangaService,
+                mangaService: mangaSource.service,
                 getKeyword: { [unowned self] in self.searchText }
             )
         } else {
-            mangaDataSource = LatestUpdateMangaDataSource(mangaService: mangaService)
+            mangaDataSource = LatestUpdateMangaDataSource(mangaService: mangaSource.service)
             mangaDataSource.fetchFromBeginning()
-            // TODO: scroll to top
             scrollToTopSubject.send()
         }
 
@@ -83,5 +84,14 @@ final class HomeViewModel: ObservableObject {
         if currentItem == mangas.last {
             mangaDataSource.fetchNextPage()
         }
+    }
+
+    func selectSource(_ source: MangaSource) {
+        guard mangaSource != source else {
+            return
+        }
+
+        mangaSource = source
+        updateDataSource(isSearching: false)
     }
 }

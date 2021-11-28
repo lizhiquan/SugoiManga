@@ -11,8 +11,8 @@ import Kingfisher
 struct MangaDetailView: View {
     @ObservedObject private var viewModel: MangaDetailViewModel
 
-    init(manga: Manga) {
-        viewModel = MangaDetailViewModel(manga: manga)
+    init(manga: Manga, mangaService: MangaService) {
+        viewModel = MangaDetailViewModel(manga: manga, mangaService: mangaService)
     }
 
     var body: some View {
@@ -68,7 +68,11 @@ struct MangaDetailView: View {
             if let chapters = viewModel.chapters {
                 ForEach(chapters.indices, id: \.self) { index in
                     let chapter = chapters[index]
-                    let readingView = ReadingView(chapters: chapters, chapterIndex: index)
+                    let readingView = ReadingView(
+                        chapters: chapters,
+                        chapterIndex: index,
+                        mangaService: viewModel.mangaService
+                    )
 
                     NavigationLink(destination: readingView) {
                         HStack {
