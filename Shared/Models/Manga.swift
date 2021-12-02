@@ -9,7 +9,6 @@ import Foundation
 
 struct Manga: Identifiable, Equatable {
     let title: String
-    let description: String
     let coverImageURL: URL?
     let detailURL: URL
     let genres: [String]

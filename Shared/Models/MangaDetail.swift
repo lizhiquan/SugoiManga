@@ -8,6 +8,7 @@
 import Foundation
 
 struct MangaDetail {
+    let summary: String
     let updatedAt: Date?
     let chapters: [Chapter]
     let author: String

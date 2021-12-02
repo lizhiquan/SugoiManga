@@ -24,7 +24,6 @@ struct NetTruyenParser {
                 let title = item.at_xpath("//div[@class='title']")?.text
                 let coverPath = item.at_xpath("//div[@class='image']//img")?["data-original"] ?? ""
                 let coverURL = URL(string: "https:\(coverPath)")
-                let description = item.at_xpath("//div[@class='box_text']")?.text
                 let detailURL = (item.at_xpath("//figcaption//a")?["href"]?
                     .replacingOccurrences(of: "http:", with: "https:") as String?)
                     .flatMap(URL.init)
@@ -39,7 +38,6 @@ struct NetTruyenParser {
                 let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
 
                 guard let title = title,
-                      let description = description,
                       let detailURL = detailURL,
                       let genres = genres,
                       let view = view else {
@@ -48,7 +46,6 @@ struct NetTruyenParser {
 
                 return Manga(
                     title: title,
-                    description: description,
                     coverImageURL: coverURL,
                     detailURL: detailURL,
                     genres: genres,
@@ -63,6 +60,7 @@ struct NetTruyenParser {
     func parseMangaDetail(from data: Data) throws -> MangaDetail {
         let html = try HTML(html: data, encoding: .utf8)
         let author = html.at_css("li.author p.col-xs-8")?.text
+        let summary = html.at_css("div.detail-content p")?.text
         let rawStatus = html.at_css("li.status p.col-xs-8")?.text
         let status: Manga.Status = rawStatus == "Đang tiến hành" ? .ongoing : .completed
         let genres = html.css("li.kind p.col-xs-8 a")
@@ -88,6 +86,7 @@ struct NetTruyenParser {
             }
 
         guard let author = author,
+              let summary = summary,
               let chaptersNode = html.at_css("#nt_listchapter") else {
             throw ParseError.parseFailed
         }
@@ -117,6 +116,7 @@ struct NetTruyenParser {
             }
 
         let mangaDetail = MangaDetail(
+            summary: summary,
             updatedAt: updatedAt,
             chapters: chapters,
             author: author,

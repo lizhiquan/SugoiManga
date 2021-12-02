@@ -18,7 +18,7 @@ final class MangaDetailViewModel: ObservableObject {
     var title: String { manga.title }
     var coverImageURL: URL? { manga.coverImageURL }
     var author: String? { mangaDetail?.author }
-    var description: String { manga.description }
+    var summary: String? { mangaDetail?.summary }
     var chapters: [Chapter] { mangaDetail?.chapters ?? [] }
 
     init(manga: Manga, mangaService: MangaService) {

@@ -35,7 +35,7 @@ struct MangaDetailView: View {
     }
 
     func mangaInfo(in size: CGSize) -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             KFImage(viewModel.coverImageURL)
                 .resizable()
                 .scaledToFit()
@@ -47,6 +47,7 @@ struct MangaDetailView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
+                .padding(.top, 8)
 
             if let author = viewModel.author {
                 Text(author)
@@ -54,8 +55,11 @@ struct MangaDetailView: View {
                     .fontWeight(.semibold)
             }
 
-            Text(viewModel.description)
-                .font(.subheadline)
+            if let summary = viewModel.summary {
+                Text(summary)
+                    .font(.subheadline)
+                    .padding(.top, 8)
+            }
         }
     }
 
@@ -63,6 +67,7 @@ struct MangaDetailView: View {
         Section("Chapters") {
             if viewModel.fetching {
                 ProgressView()
+                    .center()
             }
 
             if let chapters = viewModel.chapters {

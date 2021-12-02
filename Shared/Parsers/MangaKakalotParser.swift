@@ -24,15 +24,10 @@ struct MangaKakalotParser {
                 let title = item.at_xpath("//h3/a")?.text
                 let coverURL = item.at_xpath("//img")?["src"].flatMap(URL.init)
                 let detailURL = item.at_xpath("//h3/a")?["href"].flatMap(URL.init)
-
-                let description = item.at_xpath("//p")?.text?
-                    .dropFirst()
-                    .replacingOccurrences(of: "More.\n", with: "")
                 let rawView = item.at_xpath("//span")?.text
                 let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
 
                 guard let title = title,
-                      let description = description,
                       let detailURL = detailURL,
                       let view = view else {
                           throw ParseError.parseFailed
@@ -40,7 +35,6 @@ struct MangaKakalotParser {
 
                 return Manga(
                     title: title,
-                    description: description,
                     coverImageURL: coverURL,
                     detailURL: detailURL,
                     genres: [],
@@ -71,7 +65,9 @@ struct MangaKakalotParser {
                 formatter.timeZone = TimeZone(identifier: "UTC+0800")
                 return formatter.date(from: dateStr)
             }
-
+        let summaryNode = html.at_css("#noidungm")
+        summaryNode?.at_css("p").flatMap { summaryNode?.removeChild($0) }
+        let summary = summaryNode?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         let chapters = try html.css("div.chapter-list div.row")
             .map { item -> Chapter in
@@ -95,11 +91,13 @@ struct MangaKakalotParser {
                 )
             }
 
-        guard let author = author else {
+        guard let author = author,
+              let summary = summary else {
             throw ParseError.parseFailed
         }
 
         let mangaDetail = MangaDetail(
+            summary: summary,
             updatedAt: updatedAt,
             chapters: chapters,
             author: author,
@@ -140,7 +138,6 @@ struct MangaKakalotParser {
                 let title = item.at_css(".story_name a")?.text
                 let coverURL = item.at_xpath("//img")?["src"].flatMap(URL.init)
                 let detailURL = item.at_css(".story_name a")?["href"].flatMap(URL.init)
-
                 let rawView = item.at_css(".story_item_right span:last-child")?.text
                 let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
 
@@ -152,7 +149,6 @@ struct MangaKakalotParser {
 
                 return Manga(
                     title: title,
-                    description: "",
                     coverImageURL: coverURL,
                     detailURL: detailURL,
                     genres: [],
