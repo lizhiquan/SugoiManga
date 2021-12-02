@@ -43,6 +43,25 @@ struct MangaKakalotService: MangaService {
     }
 
     func searchMangasPublisher(keyword: String, page: Int) -> AnyPublisher<[Manga], Error> {
-        Empty().eraseToAnyPublisher()
+        guard keyword.count >= 3 else {
+            return Just([])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        let keyword = keyword
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: " ", with: "_")
+        urlComponents.path = "/search/story/\(keyword)"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "page", value: String(page))
+        ]
+        let url = urlComponents.url!
+
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { try parser.parseSearchMangas(from: $0.data) }
+            .map { $0.filter { $0.detailURL.absoluteString.starts(with: baseURL.absoluteString) } }
+            .eraseToAnyPublisher()
     }
 }

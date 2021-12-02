@@ -128,4 +128,39 @@ struct MangaKakalotParser {
 
         return chapterDetail
     }
+
+    func parseSearchMangas(from data: Data) throws -> [Manga] {
+        let html = try HTML(html: data, encoding: .utf8)
+        guard let contentNode = html.at_css(".panel_story_list") else {
+            throw ParseError.parseFailed
+        }
+
+        let mangas = try contentNode.xpath("//div[@class='story_item']")
+            .map { item -> Manga in
+                let title = item.at_css(".story_name a")?.text
+                let coverURL = item.at_xpath("//img")?["src"].flatMap(URL.init)
+                let detailURL = item.at_css(".story_name a")?["href"].flatMap(URL.init)
+
+                let rawView = item.at_css(".story_item_right span:last-child")?.text
+                let view = (rawView?.filter({ $0.isNumber }) as String?).flatMap(Int.init)
+
+                guard let title = title,
+                      let detailURL = detailURL,
+                      let view = view else {
+                          throw ParseError.parseFailed
+                      }
+
+                return Manga(
+                    title: title,
+                    description: "",
+                    coverImageURL: coverURL,
+                    detailURL: detailURL,
+                    genres: [],
+                    status: nil,
+                    view: view
+                )
+            }
+
+        return mangas
+    }
 }
