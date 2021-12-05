@@ -35,6 +35,7 @@
 		BFD73B5A2752FBF4004E5003 /* MangaKakalotParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */; };
 		BFD73B5C27530D8A004E5003 /* MangaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B5B27530D8A004E5003 /* MangaSource.swift */; };
 		BFD73B612758B332004E5003 /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B602758B332004E5003 /* CenterModifier.swift */; };
+		BFD73B63275C7FB5004E5003 /* ManganatoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD73B62275C7FB4004E5003 /* ManganatoParser.swift */; };
 		BFF73B2D273398190076103E /* MangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF73B2C273398180076103E /* MangaView.swift */; };
 		BFF73B302733A3560076103E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BFF73B2F2733A3560076103E /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaKakalotParser.swift; sourceTree = "<group>"; };
 		BFD73B5B27530D8A004E5003 /* MangaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaSource.swift; sourceTree = "<group>"; };
 		BFD73B602758B332004E5003 /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
+		BFD73B62275C7FB4004E5003 /* ManganatoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManganatoParser.swift; sourceTree = "<group>"; };
 		BFF73B2C273398180076103E /* MangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -269,6 +271,7 @@
 			children = (
 				BF7BB5E5273324CB000EDC56 /* NetTruyenParser.swift */,
 				BFD73B592752FBF4004E5003 /* MangaKakalotParser.swift */,
+				BFD73B62275C7FB4004E5003 /* ManganatoParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				BFBA5DFD273604C500EB4954 /* ChapterDetail.swift in Sources */,
 				BFD3FBB027324EB400B0DD3B /* HomeViewModel.swift in Sources */,
 				BFD73B612758B332004E5003 /* CenterModifier.swift in Sources */,
+				BFD73B63275C7FB5004E5003 /* ManganatoParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

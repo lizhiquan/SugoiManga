@@ -9,7 +9,8 @@ import Combine
 import Foundation
 
 struct MangaKakalotService: MangaService {
-    private let parser = MangaKakalotParser()
+    private let mangaKakalotParser = MangaKakalotParser()
+    private let manganatoParser = ManganatoParser()
 
     private let baseURL = URL(string: "https://mangakakalot.com")!
 
@@ -25,20 +26,31 @@ struct MangaKakalotService: MangaService {
         let url = urlComponents.url!
 
         return URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try parser.parseMangas(from: $0.data) }
-            .map { $0.filter { $0.detailURL.absoluteString.starts(with: baseURL.absoluteString) } }
+            .tryMap { try mangaKakalotParser.parseMangas(from: $0.data) }
             .eraseToAnyPublisher()
     }
 
     func mangaDetailPublisher(url: URL) -> AnyPublisher<MangaDetail, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try parser.parseMangaDetail(from: $0.data) }
+            .tryMap {
+                if isManganato(url: url) {
+                    return try manganatoParser.parseMangaDetail(from: $0.data)
+                }
+
+                return try mangaKakalotParser.parseMangaDetail(from: $0.data)
+            }
             .eraseToAnyPublisher()
     }
 
     func chapterDetailPublisher(url: URL) -> AnyPublisher<ChapterDetail, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try parser.parseChapterDetail(from: $0.data, baseURL: baseURL) }
+            .tryMap {
+                if isManganato(url: url) {
+                    return try manganatoParser.parseChapterDetail(from: $0.data, baseURL: url)
+                }
+
+                return try mangaKakalotParser.parseChapterDetail(from: $0.data, baseURL: baseURL)
+            }
             .eraseToAnyPublisher()
     }
 
@@ -60,8 +72,11 @@ struct MangaKakalotService: MangaService {
         let url = urlComponents.url!
 
         return URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try parser.parseSearchMangas(from: $0.data) }
-            .map { $0.filter { $0.detailURL.absoluteString.starts(with: baseURL.absoluteString) } }
+            .tryMap { try mangaKakalotParser.parseSearchMangas(from: $0.data) }
             .eraseToAnyPublisher()
+    }
+
+    private func isManganato(url: URL) -> Bool {
+        ["managato.com", "readmanganato.com"].contains(url.host)
     }
 }
