@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class MangaDetailViewModel: ObservableObject {
+@MainActor final class MangaDetailViewModel: ObservableObject {
     private let manga: Manga
     let mangaService: MangaService
 
@@ -33,21 +33,12 @@ final class MangaDetailViewModel: ObservableObject {
     }
 
     func fetchDetailAsync() async {
-        DispatchQueue.main.async {
-            self.fetching = true
-        }
-
-        defer {
-            DispatchQueue.main.async {
-                self.fetching = false
-            }
-        }
+        fetching = true
+        defer { fetching = false }
 
         do {
             let mangaDetail = try await fetchMangaDetailAsync()
-            DispatchQueue.main.async {
-                self.mangaDetail = mangaDetail
-            }
+            self.mangaDetail = mangaDetail
         } catch {
             print(error)
         }
