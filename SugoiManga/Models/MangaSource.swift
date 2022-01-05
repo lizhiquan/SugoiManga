@@ -8,20 +8,23 @@
 import Foundation
 
 enum MangaSource: String, CaseIterable, Identifiable {
-    case netTruyen = "Net Truyen"
-    case mangaKakalot = "Manga Kakalot"
+    case netTruyen = "nettruyen"
+    case mangaKakalot = "mangakakalot"
 
     var id: MangaSource { self }
 }
 
 extension MangaSource {
+    private static let netTruyenService = NetTruyenService()
+    private static let mangaKakalotService = MangaKakalotService()
+    
     var service: MangaService {
         switch self {
         case .netTruyen:
-            return NetTruyenService()
+            return Self.netTruyenService
 
         case .mangaKakalot:
-            return MangaKakalotService()
+            return Self.mangaKakalotService
         }
     }
 }

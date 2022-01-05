@@ -39,7 +39,8 @@ struct MangaKakalotParser {
                     detailURL: detailURL,
                     genres: [],
                     status: nil,
-                    view: view
+                    view: view,
+                    source: .mangaKakalot
                 )
             }
 
@@ -153,7 +154,8 @@ struct MangaKakalotParser {
                     detailURL: detailURL,
                     genres: [],
                     status: nil,
-                    view: view
+                    view: view,
+                    source: .mangaKakalot
                 )
             }
 

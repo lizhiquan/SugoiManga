@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Kingfisher
+import CoreData
 
 struct MangaDetailView: View {
     @ObservedObject private var viewModel: MangaDetailViewModel
 
-    init(manga: Manga, mangaService: MangaService) {
-        viewModel = MangaDetailViewModel(manga: manga, mangaService: mangaService)
+    init(manga: Manga, context: NSManagedObjectContext) {
+        viewModel = MangaDetailViewModel(manga: manga, context: context)
     }
 
     var body: some View {
@@ -29,6 +30,15 @@ struct MangaDetailView: View {
             }
         }
         .navigationTitle(viewModel.title)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    viewModel.markAsFavorite()
+                } label: {
+                    Image(systemName: viewModel.isFavorite ? "star.fill" : "star")
+                }
+            }
+        }
         .onAppear {
             viewModel.fetchDetail()
         }

@@ -50,7 +50,8 @@ struct NetTruyenParser {
                     detailURL: detailURL,
                     genres: genres,
                     status: status,
-                    view: view
+                    view: view,
+                    source: .netTruyen
                 )
             }
 

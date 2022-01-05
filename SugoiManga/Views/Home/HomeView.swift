@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @Environment(\.managedObjectContext) var managedObjectContext
 
     var body: some View {
         NavigationView {
@@ -33,10 +34,7 @@ struct HomeView: View {
                 LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(0..<viewModel.mangas.count, id: \.self) { i in
                         let manga = viewModel.mangas[i]
-                        let detailView = MangaDetailView(
-                            manga: manga,
-                            mangaService: viewModel.mangaSource.service
-                        )
+                        let detailView = MangaDetailView(manga: manga, context: managedObjectContext)
                         NavigationLink(destination: detailView) {
                             MangaView(manga: manga)
                         }

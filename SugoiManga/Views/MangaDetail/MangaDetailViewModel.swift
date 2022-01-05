@@ -7,23 +7,36 @@
 
 import Foundation
 import Combine
+import CoreData
 
 @MainActor final class MangaDetailViewModel: ObservableObject {
     private let manga: Manga
-    let mangaService: MangaService
+    private let context: NSManagedObjectContext
 
     @Published private var mangaDetail: MangaDetail?
     @Published private(set) var fetching = false
+    @Published private(set) var isFavorite = false
 
     var title: String { manga.title }
     var coverImageURL: URL? { manga.coverImageURL }
     var author: String? { mangaDetail?.author }
     var summary: String? { mangaDetail?.summary }
     var chapters: [Chapter] { mangaDetail?.chapters ?? [] }
+    var mangaService: MangaService {
+        manga.source.service
+    }
+    
+    private var entity: MangaEntity?
 
-    init(manga: Manga, mangaService: MangaService) {
+    init(manga: Manga, context: NSManagedObjectContext) {
         self.manga = manga
-        self.mangaService = mangaService
+        self.context = context
+        
+        let fetchRequest = MangaEntity.fetchRequest(manga: manga)
+        if let results = try? context.fetch(fetchRequest), !results.isEmpty {
+            entity = results.first
+            isFavorite = true
+        }
     }
 
     func fetchDetail() {
@@ -57,6 +70,39 @@ import Combine
                 }, receiveValue: { value in
                     c.resume(returning: value)
                 })
+        }
+    }
+    
+    func markAsFavorite() {
+        if isFavorite {
+            deleteFromCoreData()
+        } else {
+            saveToCoreData()
+        }
+    }
+    
+    private func saveToCoreData() {
+        entity = MangaEntity(context: context)
+        entity?.copy(from: manga)
+        
+        do {
+            try context.save()
+            isFavorite = true
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func deleteFromCoreData() {
+        guard let entity = entity else { return }
+        
+        context.delete(entity)
+        
+        do {
+            try context.save()
+            isFavorite = false
+        } catch {
+            print(error)
         }
     }
 }
