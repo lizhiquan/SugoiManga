@@ -11,6 +11,8 @@ import CoreData
 
 struct MangaDetailView: View {
     @ObservedObject private var viewModel: MangaDetailViewModel
+    @State private var isReading = false
+    @State private var selectedChapterIndex = 0
 
     init(manga: Manga, context: NSManagedObjectContext) {
         viewModel = MangaDetailViewModel(manga: manga, context: context)
@@ -41,6 +43,13 @@ struct MangaDetailView: View {
         }
         .onAppear {
             viewModel.fetchDetail()
+        }
+        .fullScreenCover(isPresented: $isReading) {
+            ReadingView(
+                chapters: viewModel.chapters,
+                chapterIndex: selectedChapterIndex,
+                mangaService: viewModel.mangaService
+            )
         }
     }
 
@@ -83,26 +92,33 @@ struct MangaDetailView: View {
             if let chapters = viewModel.chapters {
                 ForEach(chapters.indices, id: \.self) { index in
                     let chapter = chapters[index]
-                    let readingView = ReadingView(
-                        chapters: chapters,
-                        chapterIndex: index,
-                        mangaService: viewModel.mangaService
-                    )
 
-                    NavigationLink(destination: readingView) {
-                        HStack {
-                            Text(chapter.title)
-                                .lineLimit(1)
-
-                            Spacer()
-
-                            Text(chapter.updatedAt)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
+                    Button {
+                        selectedChapterIndex = index
+                        isReading = true
+                    } label: {
+                        ChapterView(chapter: chapter)
                     }
                 }
             }
+        }
+    }
+}
+
+struct ChapterView: View {
+    let chapter: Chapter
+
+    var body: some View {
+        HStack {
+            Text(chapter.title)
+                .lineLimit(1)
+                .foregroundColor(.primary)
+
+            Spacer()
+
+            Text(chapter.updatedAt)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
         }
     }
 }
