@@ -61,6 +61,7 @@ struct MangaDetailView: View {
                 .shadow(radius: 5)
                 .frame(maxWidth: size.width / 2.5)
                 .frame(maxWidth: 200)
+                .padding(.top, 8)
 
             Text(viewModel.title)
                 .font(.title2)
