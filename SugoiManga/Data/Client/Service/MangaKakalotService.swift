@@ -34,17 +34,6 @@ class MangaKakalotService: MangaService {
           .tryMap { try mangaKakalotParser.parseMangas(from: $0) }
           .mapError { _ in .decoding }
       }
-      .handleEvents(receiveSubscription: { (subscription) in
-        print("Receive subscription")
-      }, receiveOutput: { output in
-        print("Received output: \(output)")
-      }, receiveCompletion: { _ in
-        print("Receive completion")
-      }, receiveCancel: {
-        print("Receive cancel")
-      }, receiveRequest: { demand in
-        print("Receive request: \(demand)")
-      })
       .eraseToAnyPublisher()
   }
 

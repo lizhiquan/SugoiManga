@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct LatestUpdatesView: View {
   let store: Store<LatestUpdatesState, LatestUpdatesAction>
+  @State private var searchText = ""
 
   var body: some View {
     WithViewStore(store) { viewStore in
@@ -41,6 +42,10 @@ struct LatestUpdatesView: View {
               viewStore.send(.setSourcePicker(isPresented: true))
             }
           }
+        }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { searchText in
+          viewStore.send(.searchQueryChanged(searchText))
         }
       }
       .navigationViewStyle(.stack)

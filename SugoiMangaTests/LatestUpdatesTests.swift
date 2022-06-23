@@ -50,8 +50,6 @@ class LatestUpdatesTests: XCTestCase {
     }
 
     store.send(.onAppear)
-    store.receive(.loadSource)
-    testScheduler.advance()
     store.receive(.fetch) { state in
       state.mangas.removeAll()
       state.currentPage = 0

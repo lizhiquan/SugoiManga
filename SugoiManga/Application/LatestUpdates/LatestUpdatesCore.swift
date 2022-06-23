@@ -17,6 +17,7 @@ struct LatestUpdatesState: Equatable {
   var isLoadingPage = false
   var endOfList = false
   var alert: AlertState<LatestUpdatesAction>?
+  var searchQuery = ""
 }
 
 enum LatestUpdatesAction: Equatable {
@@ -24,13 +25,12 @@ enum LatestUpdatesAction: Equatable {
   case onDisappear
   case sourcePickerAction(SourcePickerAction)
   case mangaDetail(id: Manga.ID, action: MangaDetailAction)
-  case loadSource
-  case setSource(Source)
   case fetch
   case fetchNextPageIfNeeded(currentItemID: Manga.ID)
   case mangasResponse(Result<[Manga], ClientError>)
   case setSourcePicker(isPresented: Bool)
   case alertDismissed
+  case searchQueryChanged(String)
 }
 
 struct LatestUpdatesEnvironment {
@@ -56,26 +56,11 @@ let latestUpdatesReducer = Reducer<
     environment: { _ in .live(environment: .init()) }
   ),
   .init { state, action, environment in
-    struct FetchMangasID: Hashable {}
+    enum FetchMangasID {}
+    enum SearchMangasID {}
 
     switch action {
     case .onAppear:
-      return .init(value: .loadSource)
-
-    case .onDisappear:
-      return .cancel(id: FetchMangasID())
-
-    case .sourcePickerAction(.sourceTapped(let source)):
-      if source == state.source {
-        return .none
-      }
-      environment.userDefaults.set(source.id.rawValue, forKey: "source")
-      return .init(value: .setSource(source))
-
-    case .sourcePickerAction, .mangaDetail:
-      return .none
-
-    case .loadSource:
       if let source = environment.userDefaults.string(forKey: "source")
         .flatMap(SourceID.init)
         .flatMap(findSource(with:)) {
@@ -83,31 +68,60 @@ let latestUpdatesReducer = Reducer<
       }
       return .init(value: .fetch)
 
-    case .setSource(let source):
+    case .onDisappear:
+      return .merge(
+        .cancel(id: FetchMangasID.self),
+        .cancel(id: SearchMangasID.self)
+      )
+
+    case .sourcePickerAction(.sourceTapped(let source)):
+      if source == state.source {
+        return .none
+      }
+      environment.userDefaults.set(source.id.rawValue, forKey: "source")
       state.source = source
       return .init(value: .fetch)
 
+    case .sourcePickerAction, .mangaDetail:
+      return .none
+
     case .fetch:
+      enum SearchMangasID {}
+
       state.mangas.removeAll()
       state.currentPage = 0
       state.isLoading = true
       state.endOfList = false
-      return environment.mangaClient.latestUpdateMangas(state.source.id, 1)
-        .receive(on: environment.mainQueue)
-        .catchToEffect()
-        .map(LatestUpdatesAction.mangasResponse)
-        .cancellable(id: FetchMangasID(), cancelInFlight: true)
+      if state.searchQuery.isEmpty {
+        return .concatenate(
+          .cancel(id: SearchMangasID.self),
+          environment.mangaClient.latestUpdateMangas(state.source.id, 1)
+          .receive(on: environment.mainQueue)
+          .catchToEffect(LatestUpdatesAction.mangasResponse)
+          .cancellable(id: FetchMangasID.self, cancelInFlight: true)
+        )
+      } else {
+        return environment.mangaClient.searchMangas(state.source.id, state.searchQuery, 1)
+          .debounce(id: SearchMangasID.self, for: 0.3, scheduler: environment.mainQueue)
+          .catchToEffect(LatestUpdatesAction.mangasResponse)
+      }
 
     case .fetchNextPageIfNeeded(currentItemID: let id):
       guard state.mangas.last?.id == id, !state.isLoadingPage, !state.endOfList else {
         return .none
       }
       state.isLoadingPage = true
-      return environment.mangaClient.latestUpdateMangas(state.source.id, state.currentPage + 1)
-        .receive(on: environment.mainQueue)
-        .catchToEffect()
-        .map(LatestUpdatesAction.mangasResponse)
-        .cancellable(id: FetchMangasID(), cancelInFlight: true)
+      if state.searchQuery.isEmpty {
+        return environment.mangaClient.latestUpdateMangas(state.source.id, state.currentPage + 1)
+          .receive(on: environment.mainQueue)
+          .catchToEffect(LatestUpdatesAction.mangasResponse)
+          .cancellable(id: FetchMangasID.self, cancelInFlight: true)
+      } else {
+        return environment.mangaClient.searchMangas(state.source.id, state.searchQuery, state.currentPage + 1)
+          .receive(on: environment.mainQueue)
+          .catchToEffect(LatestUpdatesAction.mangasResponse)
+          .cancellable(id: SearchMangasID.self, cancelInFlight: true)
+      }
 
     case .mangasResponse(.success(let mangas)):
       let mangaItems = IdentifiedArrayOf<MangaDetailState>(
@@ -144,6 +158,10 @@ let latestUpdatesReducer = Reducer<
     case .alertDismissed:
       state.alert = nil
       return .none
+
+    case .searchQueryChanged(let query):
+      state.searchQuery = query
+      return .init(value: .fetch)
     }
   }
 )
