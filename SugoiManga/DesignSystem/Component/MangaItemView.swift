@@ -14,7 +14,7 @@ struct MangaItemView: View {
   var body: some View {
     ZStack {
       Rectangle()
-        .foregroundColor(Color(UIColor.tertiarySystemBackground))
+        .foregroundColor(Color(UIColor.systemBackground))
 
       VStack(spacing: 0) {
         GeometryReader { geometry in
@@ -40,7 +40,23 @@ struct MangaItemView: View {
       }
     }
     .cornerRadius(8)
-    .shadow(radius: 8)
+    .shadow(color: .gray, radius: 8)
     .aspectRatio(3/5, contentMode: .fit)
+  }
+}
+
+struct MangaItemView_Previews: PreviewProvider {
+  static var previews: some View {
+    MangaItemView(
+      manga: Manga(
+        title: "title",
+        coverImageURL: nil,
+        detailURL: URL(string: "123")!,
+        genres: [],
+        status: nil,
+        view: 1,
+        sourceID: .mangakakalot
+      )
+    )
   }
 }
