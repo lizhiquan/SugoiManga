@@ -41,12 +41,19 @@ let favoritesReducer = Reducer<
         .catchToEffect()
         .map(FavoritesAction.mangaLoaded)
 
+    case .mangaDetail(id: let id, action: .onDisappear):
+      if state.mangas.first(where: { $0.id == id })?.isFavorite == false {
+        // manga is removed from favorites
+        state.mangas.remove(id: id)
+      }
+      return .none
+
     case .mangaDetail:
       return .none
 
     case .mangaLoaded(.success(let mangas)):
       state.mangas = IdentifiedArrayOf<MangaDetailState>(
-        uniqueElements: mangas.map { MangaDetailState(id: $0.id, manga: $0) }
+        uniqueElements: mangas.map { MangaDetailState(id: $0.id, manga: $0, isFavorite: true) }
       )
       state.isLoading = false
       return .none

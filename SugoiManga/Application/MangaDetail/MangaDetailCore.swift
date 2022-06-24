@@ -52,12 +52,15 @@ let mangaDetailReducer = Reducer<
 
     switch action {
     case .onAppear:
-      return .merge(
-        environment.favoriteMangaClient.isFavorite(state.manga)
-          .catchToEffect()
-          .map(MangaDetailAction.favoriteLoaded),
-        .init(value: .fetch)
-      )
+      if state.isFavorite == nil {
+        // unknown favorite state
+        return .merge(
+          .init(value: .fetch),
+          environment.favoriteMangaClient.isFavorite(state.manga)
+            .catchToEffect(MangaDetailAction.favoriteLoaded)
+        )
+      }
+      return .init(value: .fetch)
 
     case .onDisappear:
       return .cancel(id: FetchDetailID())
