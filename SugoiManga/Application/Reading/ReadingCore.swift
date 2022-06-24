@@ -14,6 +14,7 @@ struct ReadingState: Equatable {
   var isLoading = false
   var detail: ChapterDetail?
   var alert: AlertState<ReadingAction>?
+  var isRefreshing = false
 
   var isFirstChapter: Bool { currentIndex == chapters.count - 1 }
   var isLastChapter: Bool { currentIndex == 0 }
@@ -31,6 +32,7 @@ enum ReadingAction: Equatable {
   case fetch
   case detailResponse(Result<ChapterDetail, ClientError>)
   case alertDismissed
+  case refresh
 }
 
 struct ReadingEnvironment {}
@@ -61,7 +63,11 @@ let readingReducer = Reducer<
     guard let source = sources.first(where: { $0.id == state.manga.sourceID }) else {
       return .none
     }
-    state.detail = nil
+
+    // keep current detail when refreshing
+    if !state.isRefreshing {
+      state.detail = nil
+    }
     state.isLoading = true
     return environment.mangaClient.chapterDetail(source.id, state.currentChapter.detailURL)
       .receive(on: environment.mainQueue)
@@ -71,12 +77,14 @@ let readingReducer = Reducer<
 
   case .detailResponse(.success(let detail)):
     state.isLoading = false
+    state.isRefreshing = false
     state.detail = detail
     return .none
 
   case .detailResponse(.failure(let error)):
     debugPrint(error)
     state.isLoading = false
+    state.isRefreshing = false
     state.alert = .init(
       title: .init("Error"),
       message: .init(error.localizedDescription),
@@ -87,5 +95,9 @@ let readingReducer = Reducer<
   case .alertDismissed:
     state.alert = nil
     return .none
+
+  case .refresh:
+    state.isRefreshing = true
+    return .init(value: .fetch)
   }
 }

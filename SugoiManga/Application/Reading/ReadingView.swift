@@ -16,27 +16,24 @@ struct ReadingView: View {
   var body: some View {
     WithViewStore(store) { viewStore in
       NavigationView {
-        VStack {
-          if viewStore.isLoading {
-            ProgressView()
-              .padding()
+        Group {
+          if viewStore.isLoading && !viewStore.isRefreshing {
+            ActivityIndicator(style: .large, isAnimating: true)
           }
 
           ZoomableScrollView {
-            List {
-              ForEach(viewStore.imageURLs, id: \.self) { url in
-                KFImage(url)
-                  .placeholder { progress in
-                    ProgressView(progress)
-                      .progressViewStyle(.circular)
-                      .padding()
-                  }
-                  .requestModifier(imageRequestModifier(headers: viewStore.imageRequestHeaders))
-                  .resizable()
-                  .scaledToFill()
-                  .listRowSeparator(.hidden)
-                  .listRowInsets(EdgeInsets())
-              }
+            List(viewStore.imageURLs, id: \.self) { url in
+              KFImage(url)
+                .placeholder { progress in
+                  ProgressView(progress)
+                    .progressViewStyle(.circular)
+                    .padding()
+                }
+                .requestModifier(imageRequestModifier(headers: viewStore.imageRequestHeaders))
+                .resizable()
+                .scaledToFill()
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
             }
             .listStyle(.plain)
           }
@@ -44,10 +41,16 @@ struct ReadingView: View {
         .navigationTitle(viewStore.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbar(viewStore) }
+        .if(viewStore.isRefreshing || !viewStore.isLoading) { view in
+          view.refreshable {
+            await viewStore.send(.refresh, while: \.isRefreshing)
+          }
+        }
       }
       .navigationViewStyle(.stack)
       .alert(store.scope(state: \.alert), dismiss: .alertDismissed)
       .onAppear { viewStore.send(.onAppear) }
+      .onDisappear { viewStore.send(.onDisappear) }
     }
   }
 

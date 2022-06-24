@@ -46,6 +46,7 @@
 		E3835F49285FD0B600986F1F /* ReadingCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F48285FD0B600986F1F /* ReadingCore.swift */; };
 		E3835F5828626AFD00986F1F /* LatestUpdatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5728626AFD00986F1F /* LatestUpdatesTests.swift */; };
 		E3835F5A2862794500986F1F /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F592862794500986F1F /* ClientError.swift */; };
+		E3835F5C2865539D00986F1F /* IfModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5B2865539D00986F1F /* IfModifier.swift */; };
 		E3BC397128531F2A000A1983 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E3BC397028531F2A000A1983 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		E3835F4E28626A9500986F1F /* SugoiMangaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SugoiMangaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3835F5728626AFD00986F1F /* LatestUpdatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpdatesTests.swift; sourceTree = "<group>"; };
 		E3835F592862794500986F1F /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
+		E3835F5B2865539D00986F1F /* IfModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD73B602758B332004E5003 /* CenterModifier.swift */,
+				E3835F5B2865539D00986F1F /* IfModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				E31139FC2855B1BC00476275 /* SourcePickerCore.swift in Sources */,
 				E31139FA28559F4D00476275 /* SourcePickerView.swift in Sources */,
 				E3835F5A2862794500986F1F /* ClientError.swift in Sources */,
+				E3835F5C2865539D00986F1F /* IfModifier.swift in Sources */,
 				E3835F3A285A719900986F1F /* FavoriteMangaClient.swift in Sources */,
 				BFF73B2D273398190076103E /* MangaItemView.swift in Sources */,
 				E36450C327840F7D0091188C /* CoreData.xcdatamodeld in Sources */,
