@@ -35,7 +35,6 @@ enum LatestUpdatesAction: Equatable {
 
 struct LatestUpdatesEnvironment {
   var userDefaults: UserDefaults
-  var mangaClient: MangaClient?
 }
 
 let latestUpdatesReducer = Reducer<

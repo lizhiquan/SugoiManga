@@ -10,8 +10,6 @@ import ComposableArchitecture
 
 @main
 struct SugoiMangaApp: App {
-  @Environment(\.scenePhase) var scenePhase
-
   var body: some Scene {
     WindowGroup {
       RootView(
@@ -21,9 +19,6 @@ struct SugoiMangaApp: App {
           environment: .live(environment: .init())
         )
       )
-    }
-    .onChange(of: scenePhase) { _ in
-      PersistenceController.shared.save()
     }
   }
 }
