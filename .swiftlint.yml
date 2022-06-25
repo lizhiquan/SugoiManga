@@ -1,0 +1,12 @@
+excluded:
+  - Pods
+disabled_rules:
+  - unused_closure_parameter
+line_length: 150
+force_cast: error
+force_try:
+  severity: error
+warning_threshold: 1
+type_name:
+  min_length: 2
+function_body_length: 60

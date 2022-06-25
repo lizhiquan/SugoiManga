@@ -15,12 +15,12 @@ class NetTruyenService: MangaService {
   private let baseURL = URL(string: "https://www.nettruyenpro.com")!
 
   private let parser = NetTruyenParser()
-  
+
   func latestUpdateMangas(page: Int) -> AnyPublisher<[Manga], ClientError> {
     var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
     urlComponents.queryItems = [URLQueryItem(name: "page", value: String(page))]
     let url = urlComponents.url!
-    
+
     return URLSession.shared.dataTaskPublisher(for: url)
       .mapError { .network(error: $0) }
       .flatMap { [self] in
@@ -30,7 +30,7 @@ class NetTruyenService: MangaService {
       }
       .eraseToAnyPublisher()
   }
-  
+
   func mangaDetail(url: URL) -> AnyPublisher<MangaDetail, ClientError> {
     URLSession.shared.dataTaskPublisher(for: url)
       .mapError { .network(error: $0) }
@@ -41,7 +41,7 @@ class NetTruyenService: MangaService {
       }
       .eraseToAnyPublisher()
   }
-  
+
   func chapterDetail(url: URL) -> AnyPublisher<ChapterDetail, ClientError> {
     URLSession.shared.dataTaskPublisher(for: url)
       .mapError { .network(error: $0) }
@@ -52,7 +52,7 @@ class NetTruyenService: MangaService {
       }
       .eraseToAnyPublisher()
   }
-  
+
   func searchMangas(keyword: String, page: Int) -> AnyPublisher<[Manga], ClientError> {
     var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
     urlComponents.path = "/tim-truyen"
@@ -61,7 +61,7 @@ class NetTruyenService: MangaService {
       URLQueryItem(name: "page", value: String(page))
     ]
     let url = urlComponents.url!
-    
+
     return URLSession.shared.dataTaskPublisher(for: url)
       .mapError { .network(error: $0) }
       .flatMap { [self] in

@@ -14,4 +14,3 @@ protocol MangaService {
   func chapterDetail(url: URL) -> AnyPublisher<ChapterDetail, ClientError>
   func searchMangas(keyword: String, page: Int) -> AnyPublisher<[Manga], ClientError>
 }
-

@@ -102,6 +102,7 @@
 		E3835F5728626AFD00986F1F /* LatestUpdatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpdatesTests.swift; sourceTree = "<group>"; };
 		E3835F592862794500986F1F /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		E3835F5B2865539D00986F1F /* IfModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfModifier.swift; sourceTree = "<group>"; };
+		E3835F5E2867B70800986F1F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +157,7 @@
 		BFD3FB6A2732364500B0DD3B = {
 			isa = PBXGroup;
 			children = (
+				E3835F5E2867B70800986F1F /* .swiftlint.yml */,
 				BFD3FB6F2732364500B0DD3B /* SugoiManga */,
 				E3835F4F28626A9500986F1F /* SugoiMangaTests */,
 				BFD3FB782732364700B0DD3B /* Products */,
@@ -347,6 +349,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFD3FBA02732364700B0DD3B /* Build configuration list for PBXNativeTarget "SugoiManga" */;
 			buildPhases = (
+				E3835F5D2867B02600986F1F /* SwiftLint */,
 				BFD3FB732732364700B0DD3B /* Sources */,
 				BFD3FB742732364700B0DD3B /* Frameworks */,
 				BFD3FB752732364700B0DD3B /* Resources */,
@@ -443,6 +446,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E3835F5D2867B02600986F1F /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BFD3FB732732364700B0DD3B /* Sources */ = {

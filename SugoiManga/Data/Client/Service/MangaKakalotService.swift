@@ -77,7 +77,7 @@ class MangaKakalotService: MangaService {
         .setFailureType(to: ClientError.self)
         .eraseToAnyPublisher()
     }
-    
+
     var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
     let keyword = keyword
       .trimmingCharacters(in: .whitespaces)
