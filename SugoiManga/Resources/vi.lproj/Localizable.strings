@@ -18,5 +18,8 @@
 "Manga Sources" = "Nguồn Truyện";
 "Latest Updates" = "Mới Cập Nhật";
 
-// manga detail screen
+// manga detail view
 "Chapters" = "Danh sách chương";
+
+// favorites view
+"No favorites" = "Không có truyện ưa thích.";

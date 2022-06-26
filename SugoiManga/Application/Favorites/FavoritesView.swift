@@ -21,6 +21,8 @@ struct FavoritesView: View {
               isAnimating: viewStore.isLoading
             )
             .vCenter()
+          } else if viewStore.mangas.isEmpty {
+            Text("No favorites")
           } else {
             ScrollView {
               let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]

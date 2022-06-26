@@ -18,5 +18,8 @@
 "Manga Sources" = "Manga Sources";
 "Latest Updates" = "Latest Updates";
 
-// manga detail screen
+// manga detail view
 "Chapters" = "Chapters";
+
+// favorites view
+"No favorites" = "No favorites.";
