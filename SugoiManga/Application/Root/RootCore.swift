@@ -8,12 +8,12 @@
 import ComposableArchitecture
 
 struct RootState: Equatable {
-  var latestUpdatesState = LatestUpdatesState()
+  var sourcePickerState = SourcePickerState()
   var favoritesState = FavoritesState()
 }
 
 enum RootAction {
-  case latestUpdatesAction(LatestUpdatesAction)
+  case sourcePickerAction(SourcePickerAction)
   case favoritesAction(FavoritesAction)
 }
 
@@ -24,10 +24,10 @@ let rootReducer = Reducer<
   RootAction,
   SystemEnvironment<RootEnvironment>
 >.combine(
-  latestUpdatesReducer.pullback(
-    state: \.latestUpdatesState,
-    action: /RootAction.latestUpdatesAction,
-    environment: { _ in .live(environment: .init(userDefaults: .standard)) }
+  sourcePickerReducer.pullback(
+    state: \.sourcePickerState,
+    action: /RootAction.sourcePickerAction,
+    environment: { _ in .live(environment: .init()) }
   ),
   favoritesReducer.pullback(
     state: \.favoritesState,
@@ -35,9 +35,6 @@ let rootReducer = Reducer<
     environment: { _ in .live(environment: .init()) }
   ),
   .init { state, action, environment in
-    switch action {
-    case .latestUpdatesAction, .favoritesAction:
-      return .none
-    }
+    return .none
   }
 )

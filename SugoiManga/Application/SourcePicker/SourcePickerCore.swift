@@ -8,25 +8,12 @@
 import ComposableArchitecture
 
 struct SourcePickerState: Equatable {
-  struct SourceSection: Equatable, Identifiable {
-    var id: String { title }
-    let title: String
-    let sources: [Source]
-  }
-
-  var sections: [SourceSection] = sourcesGroupedByLanguage()
-    .map { language, sources in
-      SourceSection(
-        title: language.localized,
-        sources: sources
-      )
-    }
-
-  var selectedSource: Source
+  var sections = IdentifiedArrayOf<SourceSectionState>()
 }
 
 enum SourcePickerAction: Equatable {
-  case sourceTapped(Source)
+  case onAppear
+  case sectionDetail(id: String, action: SourceSectionAction)
 }
 
 struct SourcePickerEnvironment {}
@@ -35,10 +22,29 @@ let sourcePickerReducer = Reducer<
   SourcePickerState,
   SourcePickerAction,
   SystemEnvironment<SourcePickerEnvironment>
-> { state, action, environment in
-  switch action {
-  case .sourceTapped(let source):
-    state.selectedSource = source
-    return .none
+>.combine(
+  sourceSectionReducer.forEach(
+    state: \.sections,
+    action: /SourcePickerAction.sectionDetail,
+    environment: { _ in }
+  ),
+  .init { state, action, environment in
+    switch action {
+    case .onAppear:
+      let sourceSections = sourcesGroupedByLanguage()
+        .map { language, sources in
+          SourceSectionState(
+            title: language.localized,
+            sources: .init(uniqueElements: sources.map {
+              LatestUpdatesState(source: $0)
+            })
+          )
+        }
+      state.sections = .init(uniqueElements: sourceSections)
+      return .none
+
+    case .sectionDetail:
+      return .none
+    }
   }
-}
+)

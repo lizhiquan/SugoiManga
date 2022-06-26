@@ -14,12 +14,15 @@ struct RootView: View {
   var body: some View {
     WithViewStore(store) { viewStore in
       TabView {
-        LatestUpdatesView(
-          store: store.scope(
-            state: \.latestUpdatesState,
-            action: RootAction.latestUpdatesAction
+        NavigationView {
+          SourcePickerView(
+            store: store.scope(
+              state: \.sourcePickerState,
+              action: RootAction.sourcePickerAction
+            )
           )
-        )
+        }
+        .navigationViewStyle(.stack)
         .tabItem {
           Label("Discover", systemImage: "square.grid.3x2")
         }

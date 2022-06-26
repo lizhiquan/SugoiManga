@@ -47,6 +47,8 @@
 		E3835F5828626AFD00986F1F /* LatestUpdatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5728626AFD00986F1F /* LatestUpdatesTests.swift */; };
 		E3835F5A2862794500986F1F /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F592862794500986F1F /* ClientError.swift */; };
 		E3835F5C2865539D00986F1F /* IfModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5B2865539D00986F1F /* IfModifier.swift */; };
+		E3835F602867D6E000986F1F /* SourceSectionCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5F2867D6E000986F1F /* SourceSectionCore.swift */; };
+		E3835F622867D70200986F1F /* SourceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F612867D70200986F1F /* SourceSectionView.swift */; };
 		E3BC397128531F2A000A1983 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E3BC397028531F2A000A1983 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,8 @@
 		E3835F592862794500986F1F /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		E3835F5B2865539D00986F1F /* IfModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfModifier.swift; sourceTree = "<group>"; };
 		E3835F5E2867B70800986F1F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		E3835F5F2867D6E000986F1F /* SourceSectionCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionCore.swift; sourceTree = "<group>"; };
+		E3835F612867D70200986F1F /* SourceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,8 @@
 			children = (
 				E31139FB2855B1BC00476275 /* SourcePickerCore.swift */,
 				E31139F928559F4D00476275 /* SourcePickerView.swift */,
+				E3835F5F2867D6E000986F1F /* SourceSectionCore.swift */,
+				E3835F612867D70200986F1F /* SourceSectionView.swift */,
 			);
 			path = SourcePicker;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 				E3835F46285FBA0B00986F1F /* ActivityIndicator.swift in Sources */,
 				E3113A072856688800476275 /* RootCore.swift in Sources */,
 				BFD73B582752FBE5004E5003 /* MangaKakalotService.swift in Sources */,
+				E3835F622867D70200986F1F /* SourceSectionView.swift in Sources */,
 				E3113A052856679000476275 /* LatestUpdatesCore.swift in Sources */,
 				E3835F38285A718100986F1F /* MangaClient.swift in Sources */,
 				E3835F3E285C57F700986F1F /* NetTruyenParser.swift in Sources */,
@@ -496,6 +503,7 @@
 				E3835F5A2862794500986F1F /* ClientError.swift in Sources */,
 				E3835F5C2865539D00986F1F /* IfModifier.swift in Sources */,
 				E3835F3A285A719900986F1F /* FavoriteMangaClient.swift in Sources */,
+				E3835F602867D6E000986F1F /* SourceSectionCore.swift in Sources */,
 				BFF73B2D273398190076103E /* MangaItemView.swift in Sources */,
 				E36450C327840F7D0091188C /* CoreData.xcdatamodeld in Sources */,
 				E3835F3C285A80D200986F1F /* FavoritesCore.swift in Sources */,

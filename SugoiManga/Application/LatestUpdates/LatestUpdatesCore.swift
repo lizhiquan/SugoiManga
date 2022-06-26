@@ -7,10 +7,9 @@
 
 import ComposableArchitecture
 
-struct LatestUpdatesState: Equatable {
-  var sourcePickerState: SourcePickerState?
-  var source = sources[0]
-  var sourcePickerPresented = false
+struct LatestUpdatesState: Equatable, Identifiable {
+  var id: SourceID { source.id }
+  let source: Source
   var mangas = IdentifiedArrayOf<MangaDetailState>()
   var currentPage = 0
   var isLoading = false
@@ -23,32 +22,21 @@ struct LatestUpdatesState: Equatable {
 enum LatestUpdatesAction: Equatable {
   case onAppear
   case onDisappear
-  case sourcePickerAction(SourcePickerAction)
   case mangaDetail(id: Manga.ID, action: MangaDetailAction)
   case fetch
   case fetchNextPageIfNeeded(currentItemID: Manga.ID)
   case mangasResponse(Result<[Manga], ClientError>)
-  case setSourcePicker(isPresented: Bool)
   case alertDismissed
   case searchQueryChanged(String)
 }
 
-struct LatestUpdatesEnvironment {
-  var userDefaults: UserDefaults
-}
+struct LatestUpdatesEnvironment {}
 
 let latestUpdatesReducer = Reducer<
   LatestUpdatesState,
   LatestUpdatesAction,
   SystemEnvironment<LatestUpdatesEnvironment>
 >.combine(
-  sourcePickerReducer
-    .optional()
-    .pullback(
-      state: \.sourcePickerState,
-      action: /LatestUpdatesAction.sourcePickerAction,
-      environment: { _ in .live(environment: .init()) }
-    ),
   mangaDetailReducer.forEach(
     state: \.mangas,
     action: /LatestUpdatesAction.mangaDetail,
@@ -60,12 +48,10 @@ let latestUpdatesReducer = Reducer<
 
     switch action {
     case .onAppear:
-      if let source = environment.userDefaults.string(forKey: "source")
-        .flatMap(SourceID.init)
-        .flatMap(findSource(with:)) {
-        state.source = source
+      if state.mangas.isEmpty {
+        return .init(value: .fetch)
       }
-      return .init(value: .fetch)
+      return .none
 
     case .onDisappear:
       return .merge(
@@ -73,15 +59,7 @@ let latestUpdatesReducer = Reducer<
         .cancel(id: SearchMangasID.self)
       )
 
-    case .sourcePickerAction(.sourceTapped(let source)):
-      if source == state.source {
-        return .none
-      }
-      environment.userDefaults.set(source.id.rawValue, forKey: "source")
-      state.source = source
-      return .init(value: .fetch)
-
-    case .sourcePickerAction, .mangaDetail:
+    case .mangaDetail:
       return .none
 
     case .fetch:
@@ -143,15 +121,6 @@ let latestUpdatesReducer = Reducer<
         message: .init(error.localizedDescription),
         dismissButton: .default(.init("OK"))
       )
-      return .none
-
-    case .setSourcePicker(isPresented: true):
-      state.sourcePickerState = SourcePickerState(selectedSource: state.source)
-      state.sourcePickerPresented = true
-      return .none
-
-    case .setSourcePicker(isPresented: false):
-      state.sourcePickerPresented = false
       return .none
 
     case .alertDismissed:

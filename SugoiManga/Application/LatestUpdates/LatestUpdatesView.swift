@@ -10,60 +10,36 @@ import ComposableArchitecture
 
 struct LatestUpdatesView: View {
   let store: Store<LatestUpdatesState, LatestUpdatesAction>
-  @State private var searchText = ""
 
   var body: some View {
     WithViewStore(store) { viewStore in
-      NavigationView {
-        Group {
-          if viewStore.isLoading {
-            ActivityIndicator(
-              style: .large,
-              isAnimating: viewStore.isLoading
-            )
-            .vCenter()
-          } else {
-            ScrollView {
-              VStack {
-                mangaList(viewStore)
-                  .padding()
-                ActivityIndicator(
-                  style: .medium,
-                  isAnimating: viewStore.isLoadingPage
-                )
-              }
-            }
-          }
-        }
-        .navigationTitle("Latest Updates")
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("Sources") {
-              viewStore.send(.setSourcePicker(isPresented: true))
-            }
-          }
-        }
-        .searchable(text: $searchText)
-        .onChange(of: searchText) { searchText in
-          viewStore.send(.searchQueryChanged(searchText))
-        }
-      }
-      .navigationViewStyle(.stack)
-      .sheet(
-        isPresented: viewStore.binding(
-          get: \.sourcePickerPresented,
-          send: LatestUpdatesAction.setSourcePicker(isPresented:)
-        )
-      ) {
-        IfLetStore(
-          store.scope(
-            state: \.sourcePickerState,
-            action: LatestUpdatesAction.sourcePickerAction
+      Group {
+        if viewStore.isLoading {
+          ActivityIndicator(
+            style: .large,
+            isAnimating: viewStore.isLoading
           )
-        ) { store in
-          SourcePickerView(store: store)
+          .vCenter()
+        } else {
+          ScrollView {
+            VStack {
+              mangaList(viewStore)
+                .padding()
+              ActivityIndicator(
+                style: .medium,
+                isAnimating: viewStore.isLoadingPage
+              )
+            }
+          }
         }
       }
+      .navigationTitle("Latest Updates")
+      .searchable(
+        text: viewStore.binding(
+          get: \.searchQuery,
+          send: LatestUpdatesAction.searchQueryChanged
+        )
+      )
       .alert(store.scope(state: \.alert), dismiss: .alertDismissed)
       .onAppear { viewStore.send(.onAppear) }
       .onDisappear { viewStore.send(.onDisappear) }
@@ -102,9 +78,7 @@ struct LatestUpdatesView_Previews: PreviewProvider {
       store: Store(
         initialState: LatestUpdatesState(source: sources[0]),
         reducer: latestUpdatesReducer,
-        environment: .dev(
-          environment: LatestUpdatesEnvironment(userDefaults: .init())
-        )
+        environment: .dev(environment: .init())
       )
     )
   }
