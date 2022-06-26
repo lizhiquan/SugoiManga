@@ -38,8 +38,8 @@ extension SystemEnvironment {
     Self(
       environment: environment,
       mainQueue: .main,
-      mangaClient: .mock,
-      favoriteMangaClient: .mock
+      mangaClient: .preview,
+      favoriteMangaClient: .preview
     )
   }
 }

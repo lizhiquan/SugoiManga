@@ -51,3 +51,18 @@ struct FavoritesView: View {
     }
   }
 }
+
+struct FavoritesView_Previews: PreviewProvider {
+  static var previews: some View {
+    ForEach(["en", "vi_VN"], id: \.self) { id in
+      FavoritesView(
+        store: Store(
+          initialState: FavoritesState(),
+          reducer: favoritesReducer,
+          environment: .dev(environment: .init())
+        )
+      )
+      .environment(\.locale, .init(identifier: id))
+    }
+  }
+}

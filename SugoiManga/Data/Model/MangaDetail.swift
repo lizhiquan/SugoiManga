@@ -15,3 +15,16 @@ struct MangaDetail: Equatable {
   let genres: [String]
   let status: Manga.Status
 }
+
+// MARK: - Mock
+
+extension MangaDetail {
+  static let mock = Self(
+    summary: "summary",
+    updatedAt: Date(),
+    chapters: Chapter.mocks,
+    author: "author",
+    genres: ["Action"],
+    status: .ongoing
+  )
+}

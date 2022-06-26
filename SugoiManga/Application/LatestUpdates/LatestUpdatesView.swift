@@ -74,12 +74,17 @@ struct LatestUpdatesView: View {
 
 struct LatestUpdatesView_Previews: PreviewProvider {
   static var previews: some View {
-    LatestUpdatesView(
-      store: Store(
-        initialState: LatestUpdatesState(source: sources[0]),
-        reducer: latestUpdatesReducer,
-        environment: .dev(environment: .init())
-      )
-    )
+    ForEach(["en", "vi_VN"], id: \.self) { id in
+      NavigationView {
+        LatestUpdatesView(
+          store: Store(
+            initialState: LatestUpdatesState(source: sources[0]),
+            reducer: latestUpdatesReducer,
+            environment: .dev(environment: .init())
+          )
+        )
+      }
+      .environment(\.locale, .init(identifier: id))
+    }
   }
 }

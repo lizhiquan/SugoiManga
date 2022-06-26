@@ -13,7 +13,7 @@ struct SourcePickerState: Equatable {
 
 enum SourcePickerAction: Equatable {
   case onAppear
-  case sectionDetail(id: String, action: SourceSectionAction)
+  case sectionDetail(id: Source.Language, action: SourceSectionAction)
 }
 
 struct SourcePickerEnvironment {}
@@ -34,7 +34,7 @@ let sourcePickerReducer = Reducer<
       let sourceSections = sourcesGroupedByLanguage()
         .map { language, sources in
           SourceSectionState(
-            title: language.localized,
+            id: language,
             sources: .init(uniqueElements: sources.map {
               LatestUpdatesState(source: $0)
             })

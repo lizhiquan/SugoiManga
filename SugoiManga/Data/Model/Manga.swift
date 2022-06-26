@@ -51,3 +51,29 @@ struct Manga: Identifiable, Equatable {
     self.sourceID = SourceID(rawValue: favorite.sourceID!)!
   }
 }
+
+// MARK: - Mock
+
+extension Manga {
+  static let mock1 = Self(
+    title: "1",
+    coverImageURL: nil,
+    detailURL: URL(string: "1")!,
+    genres: ["Action"],
+    status: .ongoing,
+    view: 100,
+    sourceID: .mangakakalot
+  )
+
+  static let mock2 = Self(
+    title: "2",
+    coverImageURL: nil,
+    detailURL: URL(string: "2")!,
+    genres: ["Romance"],
+    status: .completed,
+    view: 200,
+    sourceID: .mangakakalot
+  )
+
+  static let mocks: [Self] = [.mock1, .mock2]
+}

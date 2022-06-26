@@ -27,12 +27,24 @@ extension FavoriteMangaClient {
 }
 
 // MARK: - Mock
+
 extension FavoriteMangaClient {
   static let mock = Self(
     all: { fatalError("unmocked") },
     add: { manga in fatalError("unmocked") },
     remove: { manga in fatalError("unmocked") },
     isFavorite: { manga in fatalError("unmocked") }
+  )
+}
+
+// MARK: - Mock
+
+extension FavoriteMangaClient {
+  static let preview = Self(
+    all: { .init(value: Manga.mocks) },
+    add: { manga in .init(value: ()) },
+    remove: { manga in .init(value: ()) },
+    isFavorite: { manga in .init(value: true) }
   )
 }
 

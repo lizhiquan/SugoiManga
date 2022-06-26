@@ -11,3 +11,9 @@ struct ChapterDetail: Equatable {
   let imageURLs: [URL]
   let imageRequestHeaders: [String: String]?
 }
+
+// MARK: - Mock
+
+extension ChapterDetail {
+  static let mock = Self(imageURLs: [], imageRequestHeaders: nil)
+}

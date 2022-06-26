@@ -131,3 +131,21 @@ struct ChapterView: View {
     }
   }
 }
+
+struct MangaDetailView_Previews: PreviewProvider {
+  static var previews: some View {
+    ForEach(["en", "vi_VN"], id: \.self) { id in
+      NavigationView {
+        let manga = Manga.mock1
+        MangaDetailView(
+          store: Store(
+            initialState: MangaDetailState(id: manga.id, manga: manga),
+            reducer: mangaDetailReducer,
+            environment: .dev(environment: .init())
+          )
+        )
+      }
+      .environment(\.locale, .init(identifier: id))
+    }
+  }
+}

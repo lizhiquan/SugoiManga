@@ -8,8 +8,7 @@
 import ComposableArchitecture
 
 struct SourceSectionState: Equatable, Identifiable {
-  var id: String { title }
-  let title: String
+  var id: Source.Language
   var sources: IdentifiedArrayOf<LatestUpdatesState>
 }
 

@@ -49,6 +49,7 @@
 		E3835F5C2865539D00986F1F /* IfModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5B2865539D00986F1F /* IfModifier.swift */; };
 		E3835F602867D6E000986F1F /* SourceSectionCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F5F2867D6E000986F1F /* SourceSectionCore.swift */; };
 		E3835F622867D70200986F1F /* SourceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3835F612867D70200986F1F /* SourceSectionView.swift */; };
+		E3835F662867E28F00986F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3835F682867E28F00986F1F /* Localizable.strings */; };
 		E3BC397128531F2A000A1983 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E3BC397028531F2A000A1983 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,8 @@
 		E3835F5E2867B70800986F1F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		E3835F5F2867D6E000986F1F /* SourceSectionCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionCore.swift; sourceTree = "<group>"; };
 		E3835F612867D70200986F1F /* SourceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSectionView.swift; sourceTree = "<group>"; };
+		E3835F672867E28F00986F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E3835F692867E2A200986F1F /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,8 +178,7 @@
 				E3835F33285A620600986F1F /* Data */,
 				BFD73B5F2758B321004E5003 /* Utility */,
 				BFD3FBAC273236A900B0DD3B /* Application */,
-				BFD3FB722732364700B0DD3B /* Assets.xcassets */,
-				E357039B27697E3000086160 /* SugoiManga-Info.plist */,
+				E3835F632867E14000986F1F /* Resources */,
 			);
 			path = SugoiManga;
 			sourceTree = "<group>";
@@ -348,6 +350,16 @@
 			path = SugoiMangaTests;
 			sourceTree = "<group>";
 		};
+		E3835F632867E14000986F1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E3835F682867E28F00986F1F /* Localizable.strings */,
+				BFD3FB722732364700B0DD3B /* Assets.xcassets */,
+				E357039B27697E3000086160 /* SugoiManga-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -418,6 +430,7 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
 			);
 			mainGroup = BFD3FB6A2732364500B0DD3B;
 			packageReferences = (
@@ -441,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD3FB9C2732364700B0DD3B /* Assets.xcassets in Resources */,
+				E3835F662867E28F00986F1F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,11 +552,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		E3835F682867E28F00986F1F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3835F672867E28F00986F1F /* en */,
+				E3835F692867E2A200986F1F /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		BFD3FB9E2732364700B0DD3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -602,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -660,7 +688,7 @@
 				DEVELOPMENT_TEAM = 5KY79N7DMZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "SugoiManga/SugoiManga-Info.plist";
+				INFOPLIST_FILE = "SugoiManga/Resources/SugoiManga-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -691,7 +719,7 @@
 				DEVELOPMENT_TEAM = 5KY79N7DMZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "SugoiManga/SugoiManga-Info.plist";
+				INFOPLIST_FILE = "SugoiManga/Resources/SugoiManga-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

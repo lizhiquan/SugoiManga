@@ -40,3 +40,20 @@ struct RootView: View {
     }
   }
 }
+
+// MARK: - Previews
+
+struct RootView_Previews: PreviewProvider {
+  static var previews: some View {
+    ForEach(["en", "vi_VN"], id: \.self) { id in
+      RootView(
+        store: Store(
+          initialState: RootState(),
+          reducer: rootReducer,
+          environment: .dev(environment: .init())
+        )
+      )
+      .environment(\.locale, .init(identifier: id))
+    }
+  }
+}

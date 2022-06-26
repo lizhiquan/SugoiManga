@@ -67,4 +67,19 @@ extension MangaClient {
       fatalError("unmocked")
     }
   )
+
+  static let preview = Self(
+    latestUpdateMangas: { sourceID, page in
+      .init(value: page == 1 ? Manga.mocks : [])
+    },
+    mangaDetail: { sourceID, url in
+      .init(value: .mock)
+    },
+    chapterDetail: { sourceID, url in
+      .init(value: .mock)
+    },
+    searchMangas: { sourceID, keyword, page in
+      .init(value: page == 1 ? Manga.mocks : [])
+    }
+  )
 }

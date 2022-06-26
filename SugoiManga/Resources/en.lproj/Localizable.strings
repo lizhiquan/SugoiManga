@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SugoiManga
+
+  Created by Vincent Le on 2022-06-25.
+  
+*/
+
+// tab bar items
+"Discover" = "Discover";
+"Favorites" = "Favorites";
+
+// languages
+"English" = "English";
+"Vietnamese" = "Vietnamese";
+
+// navigation titles
+"Manga Sources" = "Manga Sources";
+"Latest Updates" = "Latest Updates";
+
+// manga detail screen
+"Chapters" = "Chapters";

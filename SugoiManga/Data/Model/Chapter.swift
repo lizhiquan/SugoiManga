@@ -14,3 +14,22 @@ struct Chapter: Identifiable, Equatable {
   let view: Int?
   let detailURL: URL
 }
+
+// MARK: - Mock
+
+extension Chapter {
+  static let mocks = [
+    Self(
+      title: "Chapter 1",
+      updatedAt: "-",
+      view: 1,
+      detailURL: URL(string: "1")!
+    ),
+    Self(
+      title: "Chapter 2",
+      updatedAt: "-",
+      view: 2,
+      detailURL: URL(string: "2")!
+    )
+  ]
+}

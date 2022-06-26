@@ -13,7 +13,7 @@ struct SourceSectionView: View {
 
   var body: some View {
     WithViewStore(store) { viewStore in
-      Section(viewStore.title) {
+      Section(LocalizedStringKey(viewStore.id.localized)) {
         ForEachStore(
           store.scope(
             state: \.sources,

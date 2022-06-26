@@ -31,12 +31,17 @@ struct SourcePickerView: View {
 
 struct SourcePickerView_Previews: PreviewProvider {
   static var previews: some View {
-    SourcePickerView(
-      store: Store(
-        initialState: SourcePickerState(),
-        reducer: sourcePickerReducer,
-        environment: .dev(environment: .init())
-      )
-    )
+    ForEach(["en", "vi_VN"], id: \.self) { id in
+      NavigationView {
+        SourcePickerView(
+          store: Store(
+            initialState: SourcePickerState(),
+            reducer: sourcePickerReducer,
+            environment: .dev(environment: .init())
+          )
+        )
+        .environment(\.locale, .init(identifier: id))
+      }
+    }
   }
 }
