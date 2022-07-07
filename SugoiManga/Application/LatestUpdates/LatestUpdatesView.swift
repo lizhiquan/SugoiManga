@@ -25,10 +25,13 @@ struct LatestUpdatesView: View {
             VStack {
               mangaList(viewStore)
                 .padding()
-              ActivityIndicator(
-                style: .medium,
-                isAnimating: viewStore.isLoadingPage
-              )
+              if viewStore.isLoadingPage {
+                ActivityIndicator(
+                  style: .medium,
+                  isAnimating: viewStore.isLoadingPage
+                )
+                .padding()
+              }
             }
           }
         }
@@ -50,7 +53,10 @@ struct LatestUpdatesView: View {
   private func mangaList(
     _ viewStore: ViewStore<LatestUpdatesState, LatestUpdatesAction>
   ) -> some View {
-    let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]
+    let columns = [GridItem(
+      .adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 150 : 110),
+      spacing: 12
+    )]
     LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
       ForEachStore(
         store.scope(
@@ -65,7 +71,6 @@ struct LatestUpdatesView: View {
                 viewStore.send(.fetchNextPageIfNeeded(currentItemID: mangaViewStore.id))
               }
           }
-          .buttonStyle(.plain)
         }
       }
     }

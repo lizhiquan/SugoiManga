@@ -25,7 +25,10 @@ struct FavoritesView: View {
             Text("No favorites")
           } else {
             ScrollView {
-              let columns = [GridItem(.adaptive(minimum: 110), spacing: 12)]
+              let columns = [GridItem(
+                .adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 150 : 110),
+                spacing: 12
+              )]
               LazyVGrid(columns: columns, spacing: 12) {
                 ForEachStore(
                   store.scope(
