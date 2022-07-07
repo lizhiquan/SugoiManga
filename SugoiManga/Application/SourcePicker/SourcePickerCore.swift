@@ -31,16 +31,19 @@ let sourcePickerReducer = Reducer<
   .init { state, action, environment in
     switch action {
     case .onAppear:
-      let sourceSections = sourcesGroupedByLanguage()
-        .map { language, sources in
-          SourceSectionState(
-            id: language,
-            sources: .init(uniqueElements: sources.map {
-              LatestUpdatesState(source: $0)
-            })
-          )
-        }
-      state.sections = .init(uniqueElements: sourceSections)
+      if state.sections.isEmpty {
+        // set up sections
+        let sourceSections = sourcesGroupedByLanguage()
+          .map { language, sources in
+            SourceSectionState(
+              id: language,
+              sources: .init(uniqueElements: sources.map {
+                LatestUpdatesState(source: $0)
+              })
+            )
+          }
+        state.sections = .init(uniqueElements: sourceSections)
+      }
       return .none
 
     case .sectionDetail:
