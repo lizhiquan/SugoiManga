@@ -685,7 +685,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5KY79N7DMZ;
+				DEVELOPMENT_TEAM = 32J55FB8B6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SugoiManga/Resources/SugoiManga-Info.plist";
@@ -700,7 +700,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincent.SugoiManga;
 				PRODUCT_NAME = SugoiManga;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -716,7 +716,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5KY79N7DMZ;
+				DEVELOPMENT_TEAM = 32J55FB8B6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SugoiManga/Resources/SugoiManga-Info.plist";
@@ -731,7 +731,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.vincentle.SugoiManga;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.vincent.SugoiManga;
 				PRODUCT_NAME = SugoiManga;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
