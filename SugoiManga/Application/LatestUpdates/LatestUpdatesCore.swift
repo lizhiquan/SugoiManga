@@ -43,8 +43,12 @@ let latestUpdatesReducer = Reducer<
     environment: { _ in .live(environment: .init()) }
   ),
   .init { state, action, environment in
-    enum FetchMangasID {}
-    enum SearchMangasID {}
+    struct FetchMangasID: Hashable {
+      let id: SourceID
+    }
+    struct SearchMangasID: Hashable {
+      let id: SourceID
+    }
 
     switch action {
     case .onAppear:
@@ -55,31 +59,29 @@ let latestUpdatesReducer = Reducer<
 
     case .onDisappear:
       return .merge(
-        .cancel(id: FetchMangasID.self),
-        .cancel(id: SearchMangasID.self)
+        .cancel(id: FetchMangasID(id: state.id)),
+        .cancel(id: SearchMangasID(id: state.id))
       )
 
     case .mangaDetail:
       return .none
 
     case .fetch:
-      enum SearchMangasID {}
-
       state.mangas.removeAll()
       state.currentPage = 0
       state.isLoading = true
       state.endOfList = false
       if state.searchQuery.isEmpty {
         return .concatenate(
-          .cancel(id: SearchMangasID.self),
+          .cancel(id: SearchMangasID(id: state.id)),
           environment.mangaClient.latestUpdateMangas(state.source.id, 1)
           .receive(on: environment.mainQueue)
           .catchToEffect(LatestUpdatesAction.mangasResponse)
-          .cancellable(id: FetchMangasID.self, cancelInFlight: true)
+          .cancellable(id: FetchMangasID(id: state.id), cancelInFlight: true)
         )
       } else {
         return environment.mangaClient.searchMangas(state.source.id, state.searchQuery, 1)
-          .debounce(id: SearchMangasID.self, for: 0.3, scheduler: environment.mainQueue)
+          .debounce(id: SearchMangasID(id: state.id), for: 0.3, scheduler: environment.mainQueue)
           .catchToEffect(LatestUpdatesAction.mangasResponse)
       }
 
@@ -92,12 +94,12 @@ let latestUpdatesReducer = Reducer<
         return environment.mangaClient.latestUpdateMangas(state.source.id, state.currentPage + 1)
           .receive(on: environment.mainQueue)
           .catchToEffect(LatestUpdatesAction.mangasResponse)
-          .cancellable(id: FetchMangasID.self, cancelInFlight: true)
+          .cancellable(id: FetchMangasID(id: state.id), cancelInFlight: true)
       } else {
         return environment.mangaClient.searchMangas(state.source.id, state.searchQuery, state.currentPage + 1)
           .receive(on: environment.mainQueue)
           .catchToEffect(LatestUpdatesAction.mangasResponse)
-          .cancellable(id: SearchMangasID.self, cancelInFlight: true)
+          .cancellable(id: SearchMangasID(id: state.id), cancelInFlight: true)
       }
 
     case .mangasResponse(.success(let mangas)):

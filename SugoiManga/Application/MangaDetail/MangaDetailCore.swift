@@ -81,8 +81,7 @@ let mangaDetailReducer = Reducer<
       state.isLoading = true
       return environment.mangaClient.mangaDetail(source.id, state.manga.detailURL)
         .receive(on: environment.mainQueue)
-        .catchToEffect()
-        .map(MangaDetailAction.detailResponse)
+        .catchToEffect(MangaDetailAction.detailResponse)
         .cancellable(id: FetchDetailID(), cancelInFlight: true)
 
     case .detailResponse(.success(let detail)):
@@ -108,14 +107,12 @@ let mangaDetailReducer = Reducer<
         return environment.favoriteMangaClient.remove(state.manga)
           .receive(on: environment.mainQueue)
           .map { false }
-          .catchToEffect()
-          .map(MangaDetailAction.favoriteLoaded)
+          .catchToEffect(MangaDetailAction.favoriteLoaded)
       }
       return environment.favoriteMangaClient.add(state.manga)
         .receive(on: environment.mainQueue)
         .map { true }
-        .catchToEffect()
-        .map(MangaDetailAction.favoriteLoaded)
+        .catchToEffect(MangaDetailAction.favoriteLoaded)
 
     case .favoriteLoaded(.success(let isFavorite)):
       state.isFavorite = isFavorite
