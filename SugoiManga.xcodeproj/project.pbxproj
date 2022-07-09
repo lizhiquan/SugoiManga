@@ -32,6 +32,7 @@
 		E3113A032856676B00476275 /* LatestUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3113A022856676B00476275 /* LatestUpdatesView.swift */; };
 		E3113A052856679000476275 /* LatestUpdatesCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3113A042856679000476275 /* LatestUpdatesCore.swift */; };
 		E3113A072856688800476275 /* RootCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3113A062856688800476275 /* RootCore.swift */; };
+		E363133B2879F241006FE9C4 /* MangaGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363133A2879F241006FE9C4 /* MangaGrid.swift */; };
 		E3645080278401140091188C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E364507F278401140091188C /* FavoritesView.swift */; };
 		E3645083278401510091188C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3645082278401510091188C /* RootView.swift */; };
 		E36450C027840EAC0091188C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36450BF27840EAC0091188C /* Persistence.swift */; };
@@ -89,6 +90,7 @@
 		E3113A042856679000476275 /* LatestUpdatesCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestUpdatesCore.swift; sourceTree = "<group>"; };
 		E3113A062856688800476275 /* RootCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCore.swift; sourceTree = "<group>"; };
 		E357039B27697E3000086160 /* SugoiManga-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SugoiManga-Info.plist"; sourceTree = "<group>"; };
+		E363133A2879F241006FE9C4 /* MangaGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaGrid.swift; sourceTree = "<group>"; };
 		E364507F278401140091188C /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		E3645082278401510091188C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		E36450BF27840EAC0091188C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				BFF73B2C273398180076103E /* MangaItemView.swift */,
+				E363133A2879F241006FE9C4 /* MangaGrid.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				E3113A002855BEDC00476275 /* SystemEnvironment.swift in Sources */,
 				BF7BB5E22733101C000EDC56 /* Manga.swift in Sources */,
 				BF7BB5E427331BD5000EDC56 /* MangaDetail.swift in Sources */,
+				E363133B2879F241006FE9C4 /* MangaGrid.swift in Sources */,
 				BFBA5E012736349F00EB4954 /* ZoomableScrollView.swift in Sources */,
 				BFBA5DFF273604DE00EB4954 /* Chapter.swift in Sources */,
 				BFD3FB982732364700B0DD3B /* SugoiMangaApp.swift in Sources */,
