@@ -33,7 +33,6 @@ struct ReadingView: View {
                 .resizable()
                 .scaledToFill()
                 .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets())
             }
             .listStyle(.plain)
           }
